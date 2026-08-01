@@ -66,6 +66,8 @@
     }
 
     .card-brand {
+      display: flex;
+      justify-content: center;
       padding: 0 14px 2px;
     }
 
@@ -133,15 +135,20 @@
       bottom: -1px;
       height: 124px;
       background: var(--panel);
-      clip-path: polygon(0 78%, 100% 40%, 100% 100%, 0 100%);
+      clip-path: polygon(0 88%, 100% 30%, 100% 100%, 0 100%);
     }
 
     .logo-image {
       display: block;
       width: min(58%, 180px);
       height: auto;
-      filter: none;
-      opacity: 0.98;
+      filter: grayscale(1) contrast(0.92) brightness(0.35);
+      opacity: 0.5;
+    }
+
+    [data-theme="dark"] .logo-image {
+      filter: grayscale(1) invert(1) brightness(1.3);
+      opacity: 0.5;
     }
 
     .hero {
