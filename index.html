@@ -91,7 +91,7 @@
       align-items: center;
       justify-items: center;
       gap: 0;
-      padding: 0 var(--page-gutter) 8px;
+      padding: 0 var(--page-gutter) calc(34px + env(safe-area-inset-bottom, 0px));
       overflow-x: clip;
       overflow-y: auto;
       position: relative;
@@ -701,7 +701,7 @@
       width: min(calc(100dvw - (var(--page-gutter) * 2)), 410px);
       max-width: 100%;
       margin-top: 0;
-      padding: clamp(8px, 2svh, 18px) 18px 6px;
+      padding: clamp(8px, 2svh, 18px) 18px calc(22px + env(safe-area-inset-bottom, 0px));
       display: grid;
       justify-items: center;
       gap: 5px;
@@ -945,7 +945,7 @@
     @media (max-height: 810px) {
       body {
         --page-gutter: 12px;
-        padding: 8px 12px 6px;
+        padding: 8px 12px calc(28px + env(safe-area-inset-bottom, 0px));
       }
 
       .card-shell {
