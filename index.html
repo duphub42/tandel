@@ -59,8 +59,8 @@
       color: var(--ink);
       background: var(--bg);
       display: grid;
+      grid-template-rows: minmax(0, 1fr) auto;
       justify-items: center;
-      align-content: center;
       gap: 4px;
       padding: 16px 16px 10px;
       overflow: hidden;
@@ -70,6 +70,7 @@
       width: min(100%, 410px);
       display: grid;
       gap: 4px;
+      align-self: center;
     }
 
     .micro-card {
@@ -330,6 +331,8 @@
       justify-items: center;
       gap: 5px;
       padding: 0 18px 4px;
+      align-self: end;
+      width: min(100%, 410px);
     }
 
     .footer-note {
