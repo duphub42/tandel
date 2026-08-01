@@ -63,21 +63,23 @@
       padding: 30px 16px;
     }
 
-    .micro-card {
+    .card-shell {
       width: min(100%, 410px);
+      display: grid;
+      gap: 8px;
+    }
+
+    .micro-card {
+      width: 100%;
       background: var(--panel);
       border: 1px solid var(--stroke);
       border-radius: var(--radius-main);
       box-shadow: var(--shadow-soft);
-      overflow: hidden;
     }
 
     .header {
-      background: color-mix(in oklab, var(--bg) 94%, transparent);
-      padding: 20px 18px 24px;
-      border-bottom: 1px solid var(--line);
+      padding: 6px 18px 4px;
       text-align: center;
-      backdrop-filter: blur(10px);
     }
 
     .logo-image {
@@ -433,7 +435,7 @@
   </style>
 </head>
 <body>
-  <main class="micro-card" aria-label="Digitale Visitenkarte von Nico Tandel">
+  <div class="card-shell">
     <header class="header">
       <img
         class="logo-image"
@@ -442,7 +444,9 @@
       />
     </header>
 
-    <section class="content">
+    <main class="micro-card" aria-label="Digitale Visitenkarte von Nico Tandel">
+
+      <section class="content">
       <article class="profile">
         <div class="avatar">
           <img src="./nico-tandel.png" alt="Profilbild Nico Tandel" />
@@ -548,9 +552,10 @@
           </details>
         </li>
       </ul>
-    </section>
+      </section>
 
-  </main>
+    </main>
+  </div>
 
   <div class="footer-wrap">
     <p class="footer-note">
