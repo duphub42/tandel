@@ -182,6 +182,19 @@
 
     .menu-details {
       margin-top: 4px;
+      overflow: hidden;
+    }
+
+    .menu-details .download-list {
+      opacity: 0;
+      transform: translateY(-4px);
+      transition: opacity 230ms ease, transform 230ms ease;
+      will-change: opacity, transform;
+    }
+
+    .menu-details[open] .download-list {
+      opacity: 1;
+      transform: translateY(0);
     }
 
     .doc-arrow {
@@ -606,6 +619,98 @@
           applyTheme(toggle.checked ? "dark" : "light", true);
         });
       }
+
+      var detailsList = document.querySelectorAll(".menu-details");
+
+      detailsList.forEach(function (detailsEl) {
+        var summary = detailsEl.querySelector("summary");
+        var runningAnimation = null;
+        var isClosing = false;
+        var isOpening = false;
+
+        if (!summary) {
+          return;
+        }
+
+        summary.addEventListener("click", function (event) {
+          event.preventDefault();
+
+          if (isClosing || !detailsEl.open) {
+            animateOpen(detailsEl, summary);
+          } else if (isOpening || detailsEl.open) {
+            animateClose(detailsEl, summary);
+          }
+        });
+
+        function animateClose(container, trigger) {
+          isClosing = true;
+
+          var startHeight = container.offsetHeight + "px";
+          var endHeight = trigger.offsetHeight + "px";
+
+          if (runningAnimation) {
+            runningAnimation.cancel();
+          }
+
+          runningAnimation = container.animate(
+            {
+              height: [startHeight, endHeight]
+            },
+            {
+              duration: 280,
+              easing: "cubic-bezier(0.4, 0, 0.2, 1)"
+            }
+          );
+
+          runningAnimation.onfinish = function () {
+            container.open = false;
+            container.style.height = "";
+            container.style.overflow = "";
+            isClosing = false;
+            runningAnimation = null;
+          };
+
+          runningAnimation.oncancel = function () {
+            isClosing = false;
+          };
+        }
+
+        function animateOpen(container, trigger) {
+          isOpening = true;
+          container.style.height = container.offsetHeight + "px";
+          container.open = true;
+
+          requestAnimationFrame(function () {
+            var startHeight = trigger.offsetHeight + "px";
+            var endHeight = container.offsetHeight + "px";
+
+            if (runningAnimation) {
+              runningAnimation.cancel();
+            }
+
+            runningAnimation = container.animate(
+              {
+                height: [startHeight, endHeight]
+              },
+              {
+                duration: 320,
+                easing: "cubic-bezier(0.22, 1, 0.36, 1)"
+              }
+            );
+
+            runningAnimation.onfinish = function () {
+              container.style.height = "";
+              container.style.overflow = "";
+              isOpening = false;
+              runningAnimation = null;
+            };
+
+            runningAnimation.oncancel = function () {
+              isOpening = false;
+            };
+          });
+        }
+      });
     })();
   </script>
 </body>
