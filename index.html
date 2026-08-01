@@ -1,0 +1,472 @@
+<!doctype html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Mulish:wght@300;400;500;600;700;800&display=swap" />
+  <title>Tandel Immobilien | Digitale Visitenkarte</title>
+  <style>
+    :root {
+      --brand-blue: #2f98df;
+      --brand-blue-dark: #1d7fbe;
+      --brand: oklch(.62 .18 248);
+      --bg: oklch(.985 .004 250);
+      --line: oklch(.9 .012 250);
+      --ink: #18212b;
+      --muted: #5f6c79;
+      --panel: #ffffff;
+      --surface: #ffffff;
+      --menu-border: rgba(16, 35, 54, 0.11);
+      --avatar-ring: #e8f3fb;
+      --avatar-bg: #d7e6f3;
+      --footer-muted: #748396;
+      --bg-top: #f6fbff;
+      --bg-bottom: #edf2f7;
+      --stroke: rgba(18, 35, 52, 0.12);
+      --shadow-soft: 0 18px 45px rgba(9, 31, 51, 0.11);
+      --shadow-card: 0 8px 20px rgba(12, 28, 44, 0.09);
+      --radius-main: 28px;
+      --radius-card: 16px;
+      --radius-pill: 14px;
+    }
+
+    [data-theme="dark"] {
+      --bg: oklch(.23 .02 250);
+      --line: oklch(.36 .02 250);
+      --ink: oklch(.94 .01 250);
+      --muted: oklch(.78 .02 250);
+      --panel: oklch(.27 .02 250);
+      --surface: oklch(.3 .02 250);
+      --menu-border: rgba(255, 255, 255, 0.16);
+      --avatar-ring: rgba(255, 255, 255, 0.17);
+      --avatar-bg: oklch(.34 .03 250);
+      --footer-muted: oklch(.75 .02 250);
+      --stroke: rgba(255, 255, 255, 0.14);
+      --shadow-soft: 0 18px 45px rgba(0, 0, 0, 0.45);
+      --shadow-card: 0 8px 20px rgba(0, 0, 0, 0.35);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      font-family: "Mulish", system-ui, -apple-system, sans-serif;
+      color: var(--ink);
+      background: var(--bg);
+      display: grid;
+      place-items: center;
+      padding: 30px 16px;
+    }
+
+    .micro-card {
+      width: min(100%, 410px);
+      background: var(--panel);
+      border: 1px solid var(--stroke);
+      border-radius: var(--radius-main);
+      box-shadow: var(--shadow-soft);
+      overflow: hidden;
+    }
+
+    .header {
+      background: color-mix(in oklab, var(--bg) 94%, transparent);
+      padding: 20px 18px 24px;
+      border-bottom: 1px solid var(--line);
+      text-align: center;
+      backdrop-filter: blur(10px);
+    }
+
+    .logo-image {
+      display: block;
+      width: min(86%, 290px);
+      margin: 2px auto 0;
+      height: auto;
+    }
+
+    .content {
+      padding: 16px;
+      display: grid;
+      gap: 12px;
+    }
+
+    .profile {
+      background: var(--surface);
+      border: 1px solid var(--stroke);
+      border-radius: var(--radius-card);
+      box-shadow: var(--shadow-card);
+      padding: 14px 14px 12px;
+      display: grid;
+      grid-template-columns: 1fr auto;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .profile-text {
+      order: 1;
+    }
+
+    .avatar {
+      order: 2;
+      width: 128px;
+      height: 128px;
+      border-radius: 50%;
+      border: 2px solid var(--avatar-ring);
+      overflow: hidden;
+      flex-shrink: 0;
+      background: var(--avatar-bg);
+    }
+
+    .avatar img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center -40%;
+      transform: scale(1.92);
+      display: block;
+    }
+
+    .name {
+      margin: 0;
+      font-size: clamp(1.45rem, 4.6vw, 1.95rem);
+      line-height: 1.05;
+      letter-spacing: 0.01em;
+    }
+
+    .role {
+      margin: 3px 0 0;
+      color: var(--muted);
+      font-size: clamp(1rem, 3.5vw, 1.22rem);
+      font-weight: 500;
+    }
+
+    .menu {
+      display: grid;
+      gap: 14px;
+      margin: 0;
+      padding: 0;
+      list-style: none;
+    }
+
+    .menu-item {
+      display: block;
+      text-decoration: none;
+      color: var(--ink);
+      background: var(--surface);
+      border: 1px solid var(--menu-border);
+      border-radius: var(--radius-pill);
+      box-shadow: 0 4px 10px rgba(7, 28, 47, 0.07);
+      padding: 14px 14px;
+      transition: transform 160ms ease, box-shadow 160ms ease, border-color 160ms ease;
+    }
+
+    .menu-item:hover,
+    .menu-item:focus-visible {
+      transform: translateY(-1px);
+      box-shadow: 0 10px 22px rgba(7, 28, 47, 0.12);
+      border-color: rgba(21, 102, 162, 0.42);
+      outline: none;
+    }
+
+    .menu-row {
+      display: grid;
+      grid-template-columns: 30px 1fr auto;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .item-text {
+      font-weight: 700;
+      line-height: 1.15;
+      font-size: clamp(1rem, 3.6vw, 1.14rem);
+    }
+
+    .icon,
+    .arrow {
+      color: var(--brand);
+      display: inline-grid;
+      place-items: center;
+    }
+
+    .icon svg,
+    .arrow svg {
+      width: 22px;
+      height: 22px;
+    }
+
+    .arrow svg {
+      width: 18px;
+      height: 18px;
+    }
+
+    .footer-wrap {
+      margin-top: 12px;
+      display: grid;
+      justify-items: center;
+      gap: 8px;
+      padding: 0 18px 8px;
+    }
+
+    .footer-note {
+      margin-top: 12px;
+      padding: 0;
+      text-align: center;
+      color: var(--footer-muted);
+      font-size: 0.8rem;
+    }
+
+    .footer-note a {
+      color: var(--brand);
+      text-decoration: none;
+      font-weight: 700;
+    }
+
+    .footer-note a:hover,
+    .footer-note a:focus-visible {
+      text-decoration: underline;
+      outline: none;
+    }
+
+    .theme-control {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      color: var(--ink);
+      font-size: 0.78rem;
+      font-weight: 700;
+      letter-spacing: 0.02em;
+    }
+
+    .theme-control__label {
+      min-width: 90px;
+      text-align: right;
+    }
+
+    .theme-switch {
+      position: relative;
+      display: inline-flex;
+      width: 48px;
+      height: 28px;
+      cursor: pointer;
+    }
+
+    .theme-switch input {
+      opacity: 0;
+      width: 0;
+      height: 0;
+      position: absolute;
+    }
+
+    .theme-switch__track {
+      position: absolute;
+      inset: 0;
+      border-radius: 999px;
+      background: color-mix(in oklab, var(--ink) 18%, transparent);
+      border: 1px solid var(--menu-border);
+      transition: background 160ms ease, border-color 160ms ease;
+    }
+
+    .theme-switch__thumb {
+      position: absolute;
+      top: 3px;
+      left: 3px;
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      background: #fff;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.24);
+      transition: transform 160ms ease;
+    }
+
+    .theme-switch input:checked + .theme-switch__track {
+      background: color-mix(in oklab, var(--brand) 65%, transparent);
+      border-color: var(--brand);
+    }
+
+    .theme-switch input:checked + .theme-switch__track .theme-switch__thumb {
+      transform: translateX(20px);
+    }
+
+    .theme-switch input:focus-visible + .theme-switch__track {
+      outline: 2px solid color-mix(in oklab, var(--brand) 65%, #fff);
+      outline-offset: 2px;
+    }
+
+    @media (max-width: 380px) {
+      .content {
+        padding: 12px;
+      }
+
+      .profile {
+        padding: 12px;
+      }
+
+      .avatar {
+        width: 112px;
+        height: 112px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main class="micro-card" aria-label="Digitale Visitenkarte von Nico Tandel">
+    <header class="header">
+      <img
+        class="logo-image"
+        src="https://tandel.immobilien/.netlify/images?url=_astro%2Ftandel-logo.mZhEN1TH.png&fm=png&q=92"
+        alt="Tandel Immobilien"
+      />
+    </header>
+
+    <section class="content">
+      <article class="profile">
+        <div class="avatar">
+          <img src="./nico-tandel.png" alt="Profilbild Nico Tandel" />
+        </div>
+        <div class="profile-text">
+          <h1 class="name">Nico Tandel</h1>
+          <p class="role">Immobilienfachwirt</p>
+        </div>
+      </article>
+
+      <ul class="menu" aria-label="Visitenkarten-Links">
+        <li>
+          <a class="menu-item" href="#" aria-label="Visitenkarte download">
+            <div class="menu-row">
+              <span class="icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="currentColor"><path d="M3 6H21V18H3V6ZM2 4C1.44772 4 1 4.44772 1 5V19C1 19.5523 1.44772 20 2 20H22C22.5523 20 23 19.5523 23 19V5C23 4.44772 22.5523 4 22 4H2ZM13 8H19V10H13V8ZM18 12H13V14H18V12ZM10.5 10C10.5 11.3807 9.38071 12.5 8 12.5C6.61929 12.5 5.5 11.3807 5.5 10C5.5 8.61929 6.61929 7.5 8 7.5C9.38071 7.5 10.5 8.61929 10.5 10ZM8 13.5C6.067 13.5 4.5 15.067 4.5 17H11.5C11.5 15.067 9.933 13.5 8 13.5Z"></path></svg>
+              </span>
+              <span class="item-text">Visitenkarte (vCard) download</span>
+              <span class="arrow" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="currentColor"><path d="M9.29 6.71a1 1 0 0 1 1.42 0l4.59 4.59a1 1 0 0 1 0 1.41l-4.59 4.59a1 1 0 0 1-1.42-1.41L13.17 12 9.29 8.12a1 1 0 0 1 0-1.41z"></path></svg>
+              </span>
+            </div>
+          </a>
+        </li>
+
+        <li>
+          <a class="menu-item" href="#" aria-label="Termin vereinbaren">
+            <div class="menu-row">
+              <span class="icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="currentColor"><path d="M7 2h2v2h6V2h2v2h3a2 2 0 0 1 2 2v13a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h3V2zm13 8H4v9h16v-9zM6 12h5v5H6v-5z"></path></svg>
+              </span>
+              <span class="item-text">Termin vereinbaren</span>
+              <span class="arrow" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="currentColor"><path d="M9.29 6.71a1 1 0 0 1 1.42 0l4.59 4.59a1 1 0 0 1 0 1.41l-4.59 4.59a1 1 0 0 1-1.42-1.41L13.17 12 9.29 8.12a1 1 0 0 1 0-1.41z"></path></svg>
+              </span>
+            </div>
+          </a>
+        </li>
+
+        <li>
+          <a class="menu-item" href="#" aria-label="Dokumente herunterladen">
+            <div class="menu-row">
+              <span class="icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="currentColor"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8l-6-6zm0 2.5L17.5 8H14V4.5zM8 12h8v2H8v-2zm0 4h8v2H8v-2z"></path></svg>
+              </span>
+              <span class="item-text">Dokumente & Unterlagen herunterladen</span>
+              <span class="arrow" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="currentColor"><path d="M9.29 6.71a1 1 0 0 1 1.42 0l4.59 4.59a1 1 0 0 1 0 1.41l-4.59 4.59a1 1 0 0 1-1.42-1.41L13.17 12 9.29 8.12a1 1 0 0 1 0-1.41z"></path></svg>
+              </span>
+            </div>
+          </a>
+        </li>
+
+        <li>
+          <a class="menu-item" href="#" aria-label="Aktuelle Angebote ansehen">
+            <div class="menu-row">
+              <span class="icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <path d="M20.6 13.4L13.4 20.6a2 2 0 0 1-2.8 0L3.4 13.4a2 2 0 0 1 0-2.8l7.2-7.2A2 2 0 0 1 12 3h8a1 1 0 0 1 1 1v8a2 2 0 0 1-.4 1.4z"></path>
+                  <circle cx="16" cy="8" r="1.2" fill="currentColor" stroke="none"></circle>
+                </svg>
+              </span>
+              <span class="item-text">Aktuelle Angebote ansehen</span>
+              <span class="arrow" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="currentColor"><path d="M9.29 6.71a1 1 0 0 1 1.42 0l4.59 4.59a1 1 0 0 1 0 1.41l-4.59 4.59a1 1 0 0 1-1.42-1.41L13.17 12 9.29 8.12a1 1 0 0 1 0-1.41z"></path></svg>
+              </span>
+            </div>
+          </a>
+        </li>
+      </ul>
+    </section>
+
+  </main>
+
+  <div class="footer-wrap">
+    <p class="footer-note">
+      (C) 2026 Tandel Immobilien ·
+      <a href="https://tandel.immobilien" target="_blank" rel="noopener noreferrer">Webseite</a>
+      ·
+      <a href="https://tandel.immobilien/impressum/" target="_blank" rel="noopener noreferrer">Impressum</a>
+      ·
+      <a href="https://tandel.immobilien/datenschutz/" target="_blank" rel="noopener noreferrer">Datenschutz</a>
+    </p>
+
+    <div class="theme-control" aria-live="polite">
+      <span class="theme-control__label" id="themeModeLabel">Auto · Hell</span>
+      <label class="theme-switch" for="themeSwitch" aria-label="Theme-Switch">
+        <input id="themeSwitch" type="checkbox" role="switch" aria-label="Zwischen hellem und dunklem Theme wechseln" />
+        <span class="theme-switch__track" aria-hidden="true">
+          <span class="theme-switch__thumb"></span>
+        </span>
+      </label>
+    </div>
+  </div>
+
+  <script>
+    (function () {
+      var THEME_KEY = "vcard-theme";
+      var root = document.documentElement;
+      var toggle = document.getElementById("themeSwitch");
+      var label = document.getElementById("themeModeLabel");
+      var media = window.matchMedia("(prefers-color-scheme: dark)");
+      var autoMode = false;
+
+      function updateLabel(theme) {
+        if (!label) {
+          return;
+        }
+        var modeText = theme === "dark" ? "Dunkel" : "Hell";
+        label.textContent = autoMode ? "Auto · " + modeText : modeText;
+      }
+
+      function applyTheme(theme, persist) {
+        root.setAttribute("data-theme", theme);
+        updateLabel(theme);
+        if (toggle) {
+          toggle.checked = theme === "dark";
+        }
+        if (persist) {
+          localStorage.setItem(THEME_KEY, theme);
+        }
+      }
+
+      var savedTheme = localStorage.getItem(THEME_KEY);
+      if (savedTheme === "dark" || savedTheme === "light") {
+        autoMode = false;
+        applyTheme(savedTheme, false);
+      } else {
+        autoMode = true;
+        applyTheme(media.matches ? "dark" : "light", false);
+      }
+
+      media.addEventListener("change", function (event) {
+        if (autoMode) {
+          applyTheme(event.matches ? "dark" : "light", false);
+        }
+      });
+
+      if (toggle) {
+        toggle.addEventListener("change", function () {
+          autoMode = false;
+          applyTheme(toggle.checked ? "dark" : "light", true);
+        });
+      }
+    })();
+  </script>
+</body>
+</html>
