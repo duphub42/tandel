@@ -372,6 +372,12 @@
       display: block;
       border-radius: 2px;
       opacity: 0.45;
+      filter: none;
+      transition: filter 180ms ease;
+    }
+
+    [data-theme="dark"] .powered-by img {
+      filter: invert(1) grayscale(1) brightness(1.08);
     }
 
     .powered-by a:hover,
