@@ -9,9 +9,8 @@
   <title>Tandel Immobilien | Digitale Visitenkarte</title>
   <style>
     :root {
-      --brand-blue: #2f98df;
-      --brand-blue-dark: #1d7fbe;
-      --brand: oklch(.62 .18 248);
+      --brand: #1f6fb2;
+      --state-accent: #c24d4d;
       --bg: oklch(.985 .004 250);
       --line: oklch(.9 .012 250);
       --ink: #18212b;
@@ -43,6 +42,7 @@
       --avatar-ring: rgba(255, 255, 255, 0.17);
       --avatar-bg: oklch(.34 .03 250);
       --footer-muted: oklch(.75 .02 250);
+      --state-accent: #f07a7a;
       --bg-top: #18202a;
       --bg-bottom: #10161f;
       --stroke: rgba(255, 255, 255, 0.14);
@@ -147,21 +147,23 @@
 
     .name {
       margin: 0;
-      font-size: clamp(1.42rem, 4.4vw, 1.88rem);
-      line-height: 1.05;
+      font-size: clamp(1.58rem, 4.9vw, 2.08rem);
+      line-height: 1.02;
       letter-spacing: 0.01em;
+      font-weight: 800;
     }
 
     .role {
       margin: 0;
       color: var(--muted);
-      font-size: clamp(1rem, 3.5vw, 1.22rem);
-      font-weight: 500;
+      font-size: clamp(0.9rem, 2.9vw, 1.02rem);
+      font-weight: 400;
+      letter-spacing: 0.015em;
     }
 
     .menu {
       display: grid;
-      gap: 14px;
+      gap: 16px;
       margin: 0;
       padding: 0;
       list-style: none;
@@ -174,15 +176,15 @@
       background: var(--surface);
       border: 1px solid var(--menu-border);
       border-radius: var(--radius-pill);
-      box-shadow: 0 2px 8px rgba(7, 28, 47, 0.05);
-      padding: 14px 14px;
+      box-shadow: 0 1px 4px rgba(7, 28, 47, 0.04);
+      padding: 15px 14px;
       transition: transform 160ms ease, box-shadow 160ms ease, border-color 160ms ease;
     }
 
     .menu-item:hover,
     .menu-item:focus-visible {
       transform: translateY(-1px);
-      box-shadow: 0 8px 18px rgba(7, 28, 47, 0.1);
+      box-shadow: 0 6px 14px rgba(7, 28, 47, 0.08);
       border-color: rgba(21, 102, 162, 0.42);
       outline: none;
     }
@@ -199,6 +201,10 @@
     .menu-details {
       margin-top: 4px;
       overflow: hidden;
+      border: 1px solid color-mix(in oklab, var(--line) 72%, transparent);
+      border-radius: 16px;
+      background: color-mix(in oklab, var(--surface) 76%, var(--bg));
+      padding: 4px;
     }
 
     .menu-details .download-list {
@@ -223,8 +229,8 @@
 
     .download-list {
       list-style: none;
-      margin: 12px 0 4px;
-      padding: 0 4px 4px 42px;
+      margin: 8px 0 2px;
+      padding: 0 8px 8px 44px;
       display: grid;
       gap: 10px;
     }
@@ -257,7 +263,7 @@
     }
 
     .pdf-icon {
-      color: #c62828;
+      color: var(--state-accent);
       display: inline-grid;
       place-items: center;
       flex-shrink: 0;
@@ -295,7 +301,7 @@
     [data-theme="dark"] .pdf-icon {
       background: rgba(255, 255, 255, 0.16);
       border-color: rgba(255, 255, 255, 0.3);
-      color: #ff6a6a;
+      color: var(--state-accent);
     }
 
     .download-list a:hover,
@@ -496,7 +502,7 @@
 
     @media (max-height: 860px) {
       .menu {
-        gap: 11px;
+        gap: 13px;
       }
 
       .menu-item {
@@ -528,15 +534,15 @@
       }
 
       .name {
-        font-size: clamp(1.22rem, 4vw, 1.55rem);
+        font-size: clamp(1.34rem, 4.2vw, 1.72rem);
       }
 
       .role {
-        font-size: clamp(0.86rem, 3vw, 1rem);
+        font-size: clamp(0.82rem, 2.8vw, 0.94rem);
       }
 
       .menu {
-        gap: 9px;
+        gap: 10px;
       }
 
       .menu-item {
