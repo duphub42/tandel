@@ -171,6 +171,91 @@
       outline: none;
     }
 
+    .menu-details > summary {
+      list-style: none;
+      cursor: pointer;
+    }
+
+    .menu-details > summary::-webkit-details-marker {
+      display: none;
+    }
+
+    .menu-details {
+      margin-top: 4px;
+    }
+
+    .doc-arrow {
+      transition: transform 180ms ease;
+    }
+
+    .menu-details[open] .doc-arrow {
+      transform: rotate(90deg);
+    }
+
+    .download-list {
+      list-style: none;
+      margin: 12px 0 4px;
+      padding: 0 4px 4px 42px;
+      display: grid;
+      gap: 10px;
+    }
+
+    .download-list a {
+      color: var(--ink);
+      text-decoration: none;
+      font-size: 0.93rem;
+      line-height: 1.25;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      border-bottom: 1px dashed color-mix(in oklab, var(--ink) 28%, transparent);
+      padding-bottom: 4px;
+    }
+
+    .download-icon {
+      color: var(--brand);
+      display: inline-grid;
+      place-items: center;
+      flex-shrink: 0;
+    }
+
+    .download-actions {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      flex-shrink: 0;
+    }
+
+    .pdf-icon {
+      color: #c62828;
+      display: inline-grid;
+      place-items: center;
+      flex-shrink: 0;
+      background: rgba(198, 40, 40, 0.12);
+      border: 1px solid rgba(198, 40, 40, 0.28);
+      border-radius: 6px;
+      width: 24px;
+      height: 24px;
+    }
+
+    .download-icon svg {
+      width: 20px;
+      height: 20px;
+    }
+
+    .pdf-icon svg {
+      width: 14px;
+      height: 14px;
+    }
+
+    .download-list a:hover,
+    .download-list a:focus-visible {
+      color: var(--brand);
+      border-bottom-color: var(--brand);
+      outline: none;
+    }
+
     .menu-row {
       display: grid;
       grid-template-columns: 30px 1fr auto;
@@ -362,20 +447,6 @@
         </li>
 
         <li>
-          <a class="menu-item" href="#" aria-label="Dokumente herunterladen">
-            <div class="menu-row">
-              <span class="icon" aria-hidden="true">
-                <svg viewBox="0 0 24 24" fill="currentColor"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8l-6-6zm0 2.5L17.5 8H14V4.5zM8 12h8v2H8v-2zm0 4h8v2H8v-2z"></path></svg>
-              </span>
-              <span class="item-text">Dokumente & Unterlagen herunterladen</span>
-              <span class="arrow" aria-hidden="true">
-                <svg viewBox="0 0 24 24" fill="currentColor"><path d="M9.29 6.71a1 1 0 0 1 1.42 0l4.59 4.59a1 1 0 0 1 0 1.41l-4.59 4.59a1 1 0 0 1-1.42-1.41L13.17 12 9.29 8.12a1 1 0 0 1 0-1.41z"></path></svg>
-              </span>
-            </div>
-          </a>
-        </li>
-
-        <li>
           <a class="menu-item" href="#" aria-label="Aktuelle Angebote ansehen">
             <div class="menu-row">
               <span class="icon" aria-hidden="true">
@@ -390,6 +461,55 @@
               </span>
             </div>
           </a>
+        </li>
+
+        <li>
+          <details class="menu-details">
+            <summary class="menu-item" aria-label="Dokumente und Unterlagen anzeigen">
+              <div class="menu-row">
+                <span class="icon" aria-hidden="true">
+                  <svg viewBox="0 0 24 24" fill="currentColor"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8l-6-6zm0 2.5L17.5 8H14V4.5zM8 12h8v2H8v-2zm0 4h8v2H8v-2z"></path></svg>
+                </span>
+                <span class="item-text">Dokumente & Unterlagen</span>
+                <span class="arrow doc-arrow" aria-hidden="true">
+                  <svg viewBox="0 0 24 24" fill="currentColor"><path d="M9.29 6.71a1 1 0 0 1 1.42 0l4.59 4.59a1 1 0 0 1 0 1.41l-4.59 4.59a1 1 0 0 1-1.42-1.41L13.17 12 9.29 8.12a1 1 0 0 1 0-1.41z"></path></svg>
+                </span>
+              </div>
+            </summary>
+
+            <ul class="download-list" aria-label="Downloads">
+              <li>
+                <a href="https://tandel.immobilien/downloads/notwendige_unterlagen.pdf" target="_blank" rel="noopener noreferrer">
+                  <span>Notwendige Unterlagen</span>
+                  <span class="download-actions" aria-hidden="true"><span class="pdf-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H7a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V7z"></path><path d="M14 2v5h5"></path><path d="M8.5 17.5h7"></path><path d="M8.5 14.5h7"></path></svg></span><span class="download-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H7a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V7z"></path><path d="M14 2v5h5"></path><path d="M12 12v6"></path><path d="M9.5 15.5L12 18l2.5-2.5"></path></svg></span></span>
+                </a>
+              </li>
+              <li>
+                <a href="https://tandel.immobilien/downloads/mieter_selbstauskunft_3.pdf" target="_blank" rel="noopener noreferrer">
+                  <span>Mieter-Selbstauskunft</span>
+                  <span class="download-actions" aria-hidden="true"><span class="pdf-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H7a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V7z"></path><path d="M14 2v5h5"></path><path d="M8.5 17.5h7"></path><path d="M8.5 14.5h7"></path></svg></span><span class="download-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H7a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V7z"></path><path d="M14 2v5h5"></path><path d="M12 12v6"></path><path d="M9.5 15.5L12 18l2.5-2.5"></path></svg></span></span>
+                </a>
+              </li>
+              <li>
+                <a href="https://tandel.immobilien/downloads/mieter_selbstauskunft_mit_buerge_0.pdf" target="_blank" rel="noopener noreferrer">
+                  <span>Selbstauskunft mit Bürge</span>
+                  <span class="download-actions" aria-hidden="true"><span class="pdf-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H7a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V7z"></path><path d="M14 2v5h5"></path><path d="M8.5 17.5h7"></path><path d="M8.5 14.5h7"></path></svg></span><span class="download-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H7a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V7z"></path><path d="M14 2v5h5"></path><path d="M12 12v6"></path><path d="M9.5 15.5L12 18l2.5-2.5"></path></svg></span></span>
+                </a>
+              </li>
+              <li>
+                <a href="https://tandel.immobilien/downloads/Einwilligung-zur-Datenerhebung-TI.pdf" target="_blank" rel="noopener noreferrer">
+                  <span>Einwilligung Datenerhebung</span>
+                  <span class="download-actions" aria-hidden="true"><span class="pdf-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H7a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V7z"></path><path d="M14 2v5h5"></path><path d="M8.5 17.5h7"></path><path d="M8.5 14.5h7"></path></svg></span><span class="download-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H7a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V7z"></path><path d="M14 2v5h5"></path><path d="M12 12v6"></path><path d="M9.5 15.5L12 18l2.5-2.5"></path></svg></span></span>
+                </a>
+              </li>
+              <li>
+                <a href="https://tandel.immobilien/downloads/Vormieterbescheinigung.pdf" target="_blank" rel="noopener noreferrer">
+                  <span>Vermieterbescheinigung</span>
+                  <span class="download-actions" aria-hidden="true"><span class="pdf-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H7a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V7z"></path><path d="M14 2v5h5"></path><path d="M8.5 17.5h7"></path><path d="M8.5 14.5h7"></path></svg></span><span class="download-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H7a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V7z"></path><path d="M14 2v5h5"></path><path d="M12 12v6"></path><path d="M9.5 15.5L12 18l2.5-2.5"></path></svg></span></span>
+                </a>
+              </li>
+            </ul>
+          </details>
         </li>
       </ul>
     </section>
