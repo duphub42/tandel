@@ -83,7 +83,7 @@
       align-self: start;
       width: min(100%, 410px);
       padding: 0;
-      margin-top: 3%;
+      margin-top: 0;
     }
 
     .card-shell::before,
@@ -261,8 +261,8 @@
       white-space: nowrap;
       padding: 6px 8px;
       border-radius: 8px;
-      border: 1px solid color-mix(in oklab, var(--line) 44%, transparent);
-      background: color-mix(in oklab, var(--ink) 92%, #0a0f1d);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      background: #000;
       color: #fff;
       font-size: 0.68rem;
       font-weight: 700;
@@ -925,6 +925,23 @@
       var toggle = document.getElementById("themeSwitch");
       var media = window.matchMedia("(prefers-color-scheme: dark)");
       var autoMode = false;
+      var brandEl = document.querySelector(".card-brand");
+      var cardShellEl = document.querySelector(".card-shell");
+
+      function positionBrandLogo() {
+        if (!brandEl || !cardShellEl) {
+          return;
+        }
+
+        var viewportHeight = window.innerHeight || document.documentElement.clientHeight;
+        var cardTop = cardShellEl.getBoundingClientRect().top;
+        var brandHeight = brandEl.getBoundingClientRect().height;
+        var minTopGap = viewportHeight * 0.03;
+        var targetTop = (cardTop - brandHeight) / 2;
+        var clampedTop = Math.max(minTopGap, targetTop);
+
+        brandEl.style.marginTop = clampedTop.toFixed(2) + "px";
+      }
 
       function applyTheme(theme, persist) {
         root.setAttribute("data-theme", theme);
@@ -944,6 +961,9 @@
         autoMode = true;
         applyTheme(media.matches ? "dark" : "light", false);
       }
+
+      positionBrandLogo();
+      window.addEventListener("resize", positionBrandLogo);
 
       media.addEventListener("change", function (event) {
         if (autoMode) {
