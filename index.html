@@ -49,6 +49,7 @@
 
     body {
       margin: 0;
+      height: 100svh;
       min-height: 100svh;
       font-family: "Mulish", system-ui, -apple-system, sans-serif;
       color: var(--ink);
@@ -59,12 +60,11 @@
       display: flex;
       flex-direction: column;
       align-items: center;
-      justify-content: flex-start;
+      justify-content: center;
       gap: 8px;
       padding: 16px 14px 10px;
       overflow-x: hidden;
-      overflow-y: scroll;
-      scrollbar-gutter: stable both-edges;
+      overflow-y: hidden;
     }
 
     .card-shell {
