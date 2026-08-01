@@ -57,11 +57,13 @@
       height: 100dvh;
       font-family: "Mulish", system-ui, -apple-system, sans-serif;
       color: var(--ink);
-      background: var(--bg);
+      background:
+        radial-gradient(120% 80% at 50% -10%, color-mix(in oklab, var(--brand) 12%, transparent), transparent 55%),
+        linear-gradient(180deg, var(--bg-top), var(--bg-bottom));
       display: grid;
       grid-template-rows: minmax(0, 1fr) auto;
       justify-items: center;
-      gap: 4px;
+      gap: 6px;
       padding: 16px 16px 10px;
       overflow: hidden;
     }
@@ -69,19 +71,21 @@
     .card-shell {
       width: min(100%, 410px);
       display: grid;
-      gap: 4px;
+      gap: 10px;
       align-self: start;
     }
 
     .micro-card {
       width: 100%;
-      background: var(--panel);
+      background: color-mix(in oklab, var(--panel) 90%, transparent);
       border-radius: var(--radius-main);
-      box-shadow: var(--shadow-soft);
+      box-shadow: 0 10px 24px rgba(9, 31, 51, 0.09);
+      border: 1px solid color-mix(in oklab, var(--line) 68%, transparent);
+      backdrop-filter: blur(6px);
     }
 
     .header {
-      padding: 6px 18px 4px;
+      padding: 4px 18px 0;
       text-align: center;
     }
 
@@ -98,27 +102,23 @@
       gap: 10px;
     }
 
-    .profile {
-      background: var(--surface);
-      border: 1px solid var(--stroke);
-      border-radius: var(--radius-card);
-      box-shadow: var(--shadow-card);
-      padding: 14px 14px 12px;
+    .hero {
+      padding: 2px 8px 2px;
       display: grid;
-      grid-template-columns: 1fr auto;
+      grid-template-columns: auto 1fr;
       align-items: center;
-      gap: 12px;
+      gap: 14px;
     }
 
     .profile-text {
-      order: 1;
-      padding-left: 40px;
+      order: 2;
+      padding-left: 0;
     }
 
     .avatar {
-      order: 2;
-      width: 128px;
-      height: 128px;
+      order: 1;
+      width: 102px;
+      height: 102px;
       border-radius: 50%;
       border: 2px solid var(--avatar-ring);
       overflow: hidden;
@@ -137,7 +137,7 @@
 
     .name {
       margin: 0;
-      font-size: clamp(1.45rem, 4.6vw, 1.95rem);
+      font-size: clamp(1.42rem, 4.4vw, 1.88rem);
       line-height: 1.05;
       letter-spacing: 0.01em;
     }
@@ -164,7 +164,7 @@
       background: var(--surface);
       border: 1px solid var(--menu-border);
       border-radius: var(--radius-pill);
-      box-shadow: 0 4px 10px rgba(7, 28, 47, 0.07);
+      box-shadow: 0 2px 8px rgba(7, 28, 47, 0.05);
       padding: 14px 14px;
       transition: transform 160ms ease, box-shadow 160ms ease, border-color 160ms ease;
     }
@@ -172,7 +172,7 @@
     .menu-item:hover,
     .menu-item:focus-visible {
       transform: translateY(-1px);
-      box-shadow: 0 10px 22px rgba(7, 28, 47, 0.12);
+      box-shadow: 0 8px 18px rgba(7, 28, 47, 0.1);
       border-color: rgba(21, 102, 162, 0.42);
       outline: none;
     }
@@ -466,24 +466,31 @@
     }
 
     @media (max-width: 380px) {
+      .hero {
+        grid-template-columns: 1fr;
+        justify-items: center;
+        text-align: center;
+        gap: 8px;
+      }
+
+      .profile-text {
+        order: 2;
+      }
+
       .content {
         padding: 12px;
       }
 
-      .profile {
-        padding: 12px;
-      }
-
       .avatar {
-        width: 112px;
-        height: 112px;
+        width: 94px;
+        height: 94px;
       }
     }
 
     @media (max-height: 860px) {
       .avatar {
-        width: 112px;
-        height: 112px;
+        width: 92px;
+        height: 92px;
       }
 
       .menu {
@@ -504,22 +511,19 @@
         padding: 4px 14px 2px;
       }
 
+      .hero {
+        gap: 10px;
+        padding: 0 6px 2px;
+      }
+
       .content {
         padding: 12px;
         gap: 8px;
       }
 
-      .profile {
-        padding: 10px 11px;
-      }
-
-      .profile-text {
-        padding-left: 34px;
-      }
-
       .avatar {
-        width: 98px;
-        height: 98px;
+        width: 82px;
+        height: 82px;
       }
 
       .name {
@@ -564,19 +568,19 @@
       />
     </header>
 
+    <section class="hero" aria-label="Profilübersicht">
+      <div class="avatar">
+        <img src="./nico-tandel.png" alt="Profilbild Nico Tandel" />
+      </div>
+      <div class="profile-text">
+        <h1 class="name">Nico Tandel</h1>
+        <p class="role">Immobilienfachwirt</p>
+      </div>
+    </section>
+
     <main class="micro-card" aria-label="Digitale Visitenkarte von Nico Tandel">
 
       <section class="content">
-      <article class="profile">
-        <div class="avatar">
-          <img src="./nico-tandel.png" alt="Profilbild Nico Tandel" />
-        </div>
-        <div class="profile-text">
-          <h1 class="name">Nico Tandel</h1>
-          <p class="role">Immobilienfachwirt</p>
-        </div>
-      </article>
-
       <ul class="menu" aria-label="Visitenkarten-Links">
         <li>
           <a class="menu-item" href="./nico-tandel.vcf" download="nico-tandel.vcf" aria-label="Visitenkarte download">
