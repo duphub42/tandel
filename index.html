@@ -9,45 +9,31 @@
   <title>Tandel Immobilien | Digitale Visitenkarte</title>
   <style>
     :root {
-      --brand: #1f6fb2;
-      --state-accent: #c24d4d;
-      --bg: oklch(.985 .004 250);
-      --line: oklch(.9 .012 250);
-      --ink: #18212b;
-      --muted: #5f6c79;
+      --brand: #6854f6;
+      --brand-deep: #4c39d7;
+      --brand-soft: #ece8ff;
+      --ink: #1d2033;
+      --muted: #6a6f88;
       --panel: #ffffff;
-      --surface: #ffffff;
-      --menu-border: rgba(16, 35, 54, 0.11);
-      --avatar-ring: #e8f3fb;
-      --avatar-bg: #d7e6f3;
-      --footer-muted: #748396;
-      --bg-top: #f6fbff;
-      --bg-bottom: #edf2f7;
-      --stroke: rgba(18, 35, 52, 0.12);
-      --shadow-soft: 0 18px 45px rgba(9, 31, 51, 0.11);
-      --shadow-card: 0 8px 20px rgba(12, 28, 44, 0.09);
-      --radius-main: 28px;
-      --radius-card: 16px;
-      --radius-pill: 14px;
+      --line: #e7e8f3;
+      --bg-top: #fbfbff;
+      --bg-bottom: #f0effa;
+      --menu-border: rgba(82, 76, 120, 0.16);
+      --state-accent: #c24d4d;
+      --footer-muted: #7a8099;
     }
 
     [data-theme="dark"] {
-      --bg: oklch(.23 .02 250);
-      --line: oklch(.36 .02 250);
-      --ink: oklch(.94 .01 250);
-      --muted: oklch(.78 .02 250);
-      --panel: oklch(.27 .02 250);
-      --surface: oklch(.3 .02 250);
-      --menu-border: rgba(255, 255, 255, 0.16);
-      --avatar-ring: rgba(255, 255, 255, 0.17);
-      --avatar-bg: oklch(.34 .03 250);
-      --footer-muted: oklch(.75 .02 250);
-      --state-accent: #f07a7a;
-      --bg-top: #18202a;
-      --bg-bottom: #10161f;
-      --stroke: rgba(255, 255, 255, 0.14);
-      --shadow-soft: 0 18px 45px rgba(0, 0, 0, 0.45);
-      --shadow-card: 0 8px 20px rgba(0, 0, 0, 0.35);
+      --ink: #edf0ff;
+      --muted: #c4c8df;
+      --panel: #1a1d2b;
+      --line: #31364d;
+      --bg-top: #0f111a;
+      --bg-bottom: #090b12;
+      --menu-border: rgba(255, 255, 255, 0.18);
+      --brand-soft: #232846;
+      --state-accent: #f38f8f;
+      --footer-muted: #a5adc8;
     }
 
     * {
@@ -56,184 +42,268 @@
 
     body {
       margin: 0;
-      height: 100dvh;
+      min-height: 100dvh;
       font-family: "Mulish", system-ui, -apple-system, sans-serif;
       color: var(--ink);
       background:
-        radial-gradient(120% 85% at 50% -12%, color-mix(in oklab, var(--brand) 7%, transparent), transparent 58%),
-        radial-gradient(90% 70% at 50% 100%, color-mix(in oklab, var(--brand) 4%, transparent), transparent 62%),
+        radial-gradient(38% 34% at 92% 68%, color-mix(in oklab, var(--brand) 17%, transparent), transparent 74%),
+        radial-gradient(45% 42% at 6% 76%, color-mix(in oklab, var(--brand) 12%, transparent), transparent 76%),
         linear-gradient(180deg, var(--bg-top), var(--bg-bottom));
       display: grid;
       grid-template-rows: minmax(0, 1fr) auto;
       justify-items: center;
-      gap: 6px;
-      padding: 16px 16px 10px;
-      overflow: hidden;
+      gap: 8px;
+      padding: 16px 14px 10px;
     }
 
     .card-shell {
       width: min(100%, 410px);
-      display: grid;
-      gap: 10px;
       align-self: start;
     }
 
     .micro-card {
-      width: 100%;
-      background: color-mix(in oklab, var(--panel) 90%, transparent);
-      border-radius: var(--radius-main);
-      box-shadow: 0 10px 24px rgba(9, 31, 51, 0.09);
-      border: 1px solid color-mix(in oklab, var(--line) 68%, transparent);
-      backdrop-filter: blur(6px);
+      position: relative;
+      overflow: hidden;
+      border-radius: 30px;
+      background: var(--panel);
+      border: 1px solid color-mix(in oklab, var(--line) 85%, transparent);
+      box-shadow:
+        0 24px 50px rgba(57, 54, 97, 0.14),
+        0 4px 14px rgba(19, 20, 40, 0.08);
+      isolation: isolate;
     }
 
     [data-theme="dark"] .micro-card {
-      box-shadow: 0 12px 28px rgba(0, 0, 0, 0.35);
-      background: color-mix(in oklab, var(--panel) 94%, transparent);
+      box-shadow:
+        0 24px 50px rgba(0, 0, 0, 0.45),
+        0 3px 12px rgba(0, 0, 0, 0.38);
+    }
+
+    .micro-card::before,
+    .micro-card::after {
+      content: "";
+      position: absolute;
+      border-radius: 999px;
+      pointer-events: none;
+      z-index: -1;
+    }
+
+    .micro-card::before {
+      width: 240px;
+      height: 240px;
+      right: -132px;
+      top: 220px;
+      background: color-mix(in oklab, var(--brand) 10%, transparent);
+    }
+
+    .micro-card::after {
+      width: 180px;
+      height: 180px;
+      left: -102px;
+      top: 332px;
+      background: color-mix(in oklab, var(--brand) 8%, transparent);
+    }
+
+    .hero-panel {
+      position: relative;
+      padding: 18px 22px 94px;
+      background: linear-gradient(140deg, #7d60ff 0%, var(--brand) 52%, var(--brand-deep) 100%);
+      color: #fff;
+      border-radius: 30px 30px 0 0;
+      overflow: visible;
+    }
+
+    [data-theme="dark"] .hero-panel {
+      background: linear-gradient(140deg, #5643d8 0%, #4c39d7 52%, #35297f 100%);
+    }
+
+    .hero-panel::after {
+      content: "";
+      position: absolute;
+      left: -2px;
+      right: -2px;
+      bottom: -1px;
+      height: 124px;
+      background: var(--panel);
+      clip-path: polygon(0 78%, 100% 40%, 100% 100%, 0 100%);
     }
 
     .header {
+      margin-bottom: 22px;
       position: relative;
-      padding: 4px 18px 14px;
-      text-align: center;
-    }
-
-    .header::after {
-      content: "";
-      position: absolute;
-      left: 7%;
-      right: 7%;
-      bottom: 0;
-      height: 2px;
-      background: color-mix(in oklab, var(--brand) 45%, var(--line));
-      transform: skewX(-18deg);
-      transform-origin: left center;
-      opacity: 0.72;
-      border-radius: 999px;
+      z-index: 1;
     }
 
     .logo-image {
       display: block;
-      width: min(86%, 290px);
-      margin: 2px auto 0;
+      width: min(58%, 180px);
       height: auto;
-    }
-
-    .content {
-      padding: 14px;
-      display: grid;
-      gap: 10px;
+      filter: saturate(0) brightness(2.2);
+      opacity: 0.95;
     }
 
     .hero {
-      padding: 2px 14px 4px;
+      position: relative;
+      z-index: 2;
       display: grid;
       grid-template-columns: 1fr auto;
-      align-items: center;
       gap: 14px;
-      margin-top: -6px;
+      align-items: end;
     }
 
     .profile-text {
-      order: 1;
       display: grid;
-      gap: 4px;
-      padding-left: 54px;
+      gap: 8px;
+      padding-bottom: 48px;
+    }
+
+    .name {
+      margin: 0;
+      font-size: clamp(2.05rem, 8vw, 3rem);
+      line-height: 0.98;
+      font-weight: 800;
+      letter-spacing: 0.01em;
+      color: #fff;
+      text-wrap: balance;
+    }
+
+    .role {
+      margin: 0;
+      font-size: clamp(0.95rem, 3.5vw, 1.1rem);
+      font-weight: 500;
+      line-height: 1.35;
+      color: rgba(255, 255, 255, 0.86);
+      max-width: 18ch;
     }
 
     .avatar {
-      order: 2;
-      width: clamp(78px, 14vmin, 110px);
-      height: clamp(78px, 14vmin, 110px);
-      border-radius: 50%;
-      border: 2px solid var(--avatar-ring);
+      width: clamp(132px, 38vw, 185px);
+      height: clamp(132px, 38vw, 185px);
+      border-radius: 999px;
       overflow: hidden;
-      flex-shrink: 0;
-      background: var(--avatar-bg);
-      position: relative;
-      z-index: 2;
-      margin-top: -16px;
-      box-shadow: 0 8px 20px rgba(9, 31, 51, 0.18);
+      border: 5px solid color-mix(in oklab, var(--panel) 90%, transparent);
+      background: #d6d9ea;
+      box-shadow: 0 14px 28px rgba(9, 12, 29, 0.24);
+      transform: translateY(40px);
+    }
+
+    [data-theme="dark"] .avatar {
+      border-color: #262c43;
+      box-shadow: 0 14px 28px rgba(0, 0, 0, 0.44);
     }
 
     .avatar img {
       width: 100%;
       height: 100%;
       object-fit: cover;
-      object-position: center -40%;
-      transform: scale(1.92);
+      object-position: center -34%;
+      transform: scale(1.9);
       display: block;
     }
 
-    [data-theme="dark"] .header::after {
-      background: color-mix(in oklab, var(--brand) 55%, var(--line));
-      opacity: 0.82;
+    .content {
+      position: relative;
+      z-index: 1;
+      padding: 30px 20px 16px;
+      display: grid;
+      gap: 16px;
     }
 
-    [data-theme="dark"] .avatar {
-      box-shadow: 0 10px 22px rgba(0, 0, 0, 0.42);
+    .about {
+      display: grid;
+      gap: 7px;
+      background: color-mix(in oklab, var(--panel) 86%, var(--brand-soft));
+      border: 1px solid color-mix(in oklab, var(--line) 70%, transparent);
+      border-radius: 16px;
+      padding: 14px 14px 13px;
     }
 
-    .name {
+    .about h2 {
       margin: 0;
-      font-size: clamp(1.66rem, 5.2vw, 2.2rem);
-      line-height: 1.02;
-      letter-spacing: 0.01em;
+      font-size: 1.1rem;
       font-weight: 800;
+      letter-spacing: 0.01em;
     }
 
-    .role {
+    .about p {
       margin: 0;
       color: var(--muted);
-      font-size: clamp(0.86rem, 2.7vw, 0.98rem);
-      font-weight: 300;
-      letter-spacing: 0.015em;
+      font-size: 0.94rem;
+      line-height: 1.45;
+      font-weight: 500;
     }
 
     .menu {
-      display: grid;
-      gap: 18px;
       margin: 0;
-      padding: 0;
+      padding: 14px 0 0;
       list-style: none;
+      border-top: 1px solid color-mix(in oklab, var(--line) 84%, transparent);
+      display: grid;
+      gap: 6px;
     }
 
     .menu-item {
       display: block;
       text-decoration: none;
       color: var(--ink);
-      background: var(--surface);
-      border: 1px solid var(--menu-border);
-      border-radius: var(--radius-pill);
-      box-shadow: 0 1px 3px rgba(7, 28, 47, 0.04);
-      padding: 15px 14px;
-      transition: transform 160ms ease, box-shadow 160ms ease, border-color 160ms ease;
+      border-radius: 14px;
+      padding: 9px 10px;
+      border: 1px solid transparent;
+      transition: background 160ms ease, border-color 160ms ease, transform 160ms ease;
     }
 
     .menu-item:hover,
     .menu-item:focus-visible {
-      transform: translateY(-1px);
-      box-shadow: 0 4px 12px rgba(7, 28, 47, 0.07);
-      border-color: color-mix(in oklab, var(--brand) 48%, var(--menu-border));
+      background: color-mix(in oklab, var(--brand) 8%, var(--panel));
+      border-color: color-mix(in oklab, var(--brand) 40%, transparent);
+      transform: translateX(1px);
       outline: none;
     }
 
     .menu-item--primary {
-      background: var(--brand);
-      border-color: color-mix(in oklab, var(--brand) 76%, black);
-      color: #fff;
-      box-shadow: 0 5px 14px color-mix(in oklab, var(--brand) 32%, transparent);
+      background: color-mix(in oklab, var(--brand) 12%, var(--panel));
+      border-color: color-mix(in oklab, var(--brand) 36%, transparent);
     }
 
-    .menu-item--primary .icon,
-    .menu-item--primary .arrow {
-      color: #fff;
+    .menu-row {
+      display: grid;
+      grid-template-columns: 38px 1fr auto;
+      align-items: center;
+      gap: 11px;
     }
 
-    .menu-item--primary:hover,
-    .menu-item--primary:focus-visible {
-      border-color: color-mix(in oklab, var(--brand) 62%, black);
-      box-shadow: 0 9px 18px color-mix(in oklab, var(--brand) 36%, transparent);
+    .icon {
+      width: 33px;
+      height: 33px;
+      border-radius: 999px;
+      display: inline-grid;
+      place-items: center;
+      color: #fff;
+      background: linear-gradient(145deg, #8a70ff, var(--brand));
+      box-shadow: 0 3px 9px rgba(91, 73, 210, 0.32);
+    }
+
+    .icon svg {
+      width: 17px;
+      height: 17px;
+    }
+
+    .item-text {
+      font-size: clamp(1rem, 3.6vw, 1.15rem);
+      font-weight: 700;
+      line-height: 1.18;
+    }
+
+    .arrow {
+      color: color-mix(in oklab, var(--brand) 78%, transparent);
+      display: inline-grid;
+      place-items: center;
+      opacity: 0.9;
+    }
+
+    .arrow svg {
+      width: 18px;
+      height: 18px;
     }
 
     .menu-details > summary {
@@ -246,14 +316,13 @@
     }
 
     .menu-details {
-      margin-top: 4px;
       overflow: hidden;
     }
 
     .menu-details .download-list {
       opacity: 0;
       transform: translateY(-4px);
-      transition: opacity 230ms ease, transform 230ms ease;
+      transition: opacity 220ms ease, transform 220ms ease;
       will-change: opacity, transform;
     }
 
@@ -272,26 +341,44 @@
 
     .download-list {
       list-style: none;
-      margin: 8px 0 2px;
-      padding: 0 8px 8px 44px;
+      margin: 5px 0 0;
+      padding: 8px 8px 9px 48px;
       display: grid;
-      gap: 10px;
-      border: 1px solid color-mix(in oklab, var(--line) 68%, transparent);
-      border-radius: 14px;
-      background: color-mix(in oklab, var(--surface) 82%, var(--bg));
+      gap: 8px;
+      border: 1px solid var(--menu-border);
+      border-radius: 12px;
+      background: color-mix(in oklab, var(--panel) 84%, var(--brand-soft));
     }
 
     .download-list a {
       color: var(--ink);
       text-decoration: none;
-      font-size: 0.93rem;
-      line-height: 1.25;
+      font-size: 0.9rem;
+      line-height: 1.28;
       display: flex;
       align-items: center;
       justify-content: space-between;
       gap: 10px;
-      border-bottom: 1px dashed color-mix(in oklab, var(--ink) 28%, transparent);
+      border-bottom: 1px dashed color-mix(in oklab, var(--ink) 22%, transparent);
       padding-bottom: 4px;
+    }
+
+    .download-list li:last-child a {
+      border-bottom: 0;
+      padding-bottom: 0;
+    }
+
+    .download-list a:hover,
+    .download-list a:focus-visible {
+      color: var(--brand);
+      outline: none;
+    }
+
+    .download-actions {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      flex-shrink: 0;
     }
 
     .download-icon {
@@ -301,11 +388,9 @@
       flex-shrink: 0;
     }
 
-    .download-actions {
-      display: inline-flex;
-      align-items: center;
-      gap: 7px;
-      flex-shrink: 0;
+    .download-icon svg {
+      width: 19px;
+      height: 19px;
     }
 
     .pdf-icon {
@@ -313,8 +398,8 @@
       display: inline-grid;
       place-items: center;
       flex-shrink: 0;
-      background: #f1f3f6;
-      border: 1px solid #d7dde5;
+      background: #f2f0f8;
+      border: 1px solid #ddd6eb;
       border-radius: 5px;
       width: 31px;
       height: 20px;
@@ -334,141 +419,27 @@
       display: none;
     }
 
-    .download-icon svg {
-      width: 20px;
-      height: 20px;
-    }
-
-    .pdf-icon svg {
-      width: 14px;
-      height: 14px;
-    }
-
     [data-theme="dark"] .pdf-icon {
-      background: rgba(255, 255, 255, 0.16);
-      border-color: rgba(255, 255, 255, 0.3);
-      color: var(--state-accent);
-    }
-
-    .download-list a:hover,
-    .download-list a:focus-visible {
-      color: var(--brand);
-      border-bottom-color: var(--brand);
-      outline: none;
-    }
-
-    .menu-row {
-      display: grid;
-      grid-template-columns: 30px 1fr auto;
-      align-items: center;
-      gap: 10px;
-    }
-
-    .item-text {
-      font-weight: 700;
-      line-height: 1.15;
-      font-size: clamp(1rem, 3.6vw, 1.14rem);
-    }
-
-    .icon,
-    .arrow {
-      color: var(--brand);
-      display: inline-grid;
-      place-items: center;
-    }
-
-    .icon svg,
-    .arrow svg {
-      width: 22px;
-      height: 22px;
-    }
-
-    .arrow svg {
-      width: 18px;
-      height: 18px;
+      background: rgba(255, 255, 255, 0.15);
+      border-color: rgba(255, 255, 255, 0.22);
     }
 
     .footer-wrap {
+      width: min(100%, 410px);
       margin-top: 2px;
+      padding: 0 18px 6px;
       display: grid;
       justify-items: center;
       gap: 5px;
-      padding: 0 18px 4px;
-      align-self: end;
-      width: min(100%, 410px);
-    }
-
-    .footer-note {
-      margin-top: 6px;
-      padding: 0;
-      text-align: center;
-      color: color-mix(in oklab, var(--footer-muted) 78%, transparent);
-      font-size: 0.72rem;
-      font-weight: 400;
-      letter-spacing: 0.01em;
-    }
-
-    .powered-by {
-      margin: 0;
-      display: inline-flex;
-      align-items: center;
-      gap: 4px;
-      font-size: 0.6rem;
-      line-height: 1;
-      opacity: 0.36;
-      color: var(--footer-muted);
-    }
-
-    .powered-by a {
-      color: inherit;
-      text-decoration: none;
-      display: inline-flex;
-      align-items: center;
-      gap: 4px;
-    }
-
-    .powered-by img {
-      width: 11px;
-      height: 11px;
-      object-fit: contain;
-      display: block;
-      border-radius: 2px;
-      opacity: 0.45;
-      filter: none;
-      transition: filter 180ms ease;
-    }
-
-    [data-theme="dark"] .powered-by img {
-      filter: invert(1) grayscale(1) brightness(1.08);
-    }
-
-    .powered-by a:hover,
-    .powered-by a:focus-visible {
-      opacity: 0.92;
-      text-decoration: underline;
-      outline: none;
-    }
-
-    .footer-note a {
-      color: inherit;
-      text-decoration: none;
-      font-weight: 500;
-    }
-
-    .footer-note a:hover,
-    .footer-note a:focus-visible {
-      text-decoration: underline;
-      text-underline-offset: 2px;
-      outline: none;
     }
 
     .theme-control {
       display: inline-flex;
       align-items: center;
       gap: 8px;
-      color: color-mix(in oklab, var(--footer-muted) 82%, transparent);
+      color: color-mix(in oklab, var(--footer-muted) 84%, transparent);
       font-size: 0.67rem;
-      font-weight: 500;
+      font-weight: 600;
       letter-spacing: 0.015em;
     }
 
@@ -514,7 +485,7 @@
     }
 
     .theme-switch input:checked + .theme-switch__track {
-      background: color-mix(in oklab, var(--brand) 65%, transparent);
+      background: color-mix(in oklab, var(--brand) 68%, transparent);
       border-color: var(--brand);
     }
 
@@ -527,118 +498,159 @@
       outline-offset: 2px;
     }
 
+    .footer-note {
+      margin: 4px 0 0;
+      text-align: center;
+      color: color-mix(in oklab, var(--footer-muted) 80%, transparent);
+      font-size: 0.72rem;
+      font-weight: 500;
+      letter-spacing: 0.01em;
+    }
+
+    .footer-note a {
+      color: inherit;
+      text-decoration: none;
+      font-weight: 600;
+    }
+
+    .footer-note a:hover,
+    .footer-note a:focus-visible {
+      text-decoration: underline;
+      text-underline-offset: 2px;
+      outline: none;
+    }
+
+    .powered-by {
+      margin: 0;
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      font-size: 0.6rem;
+      line-height: 1;
+      opacity: 0.4;
+      color: var(--footer-muted);
+    }
+
+    .powered-by a {
+      color: inherit;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+    .powered-by img {
+      width: 11px;
+      height: 11px;
+      object-fit: contain;
+      display: block;
+      border-radius: 2px;
+      opacity: 0.46;
+      filter: none;
+      transition: filter 180ms ease;
+    }
+
+    [data-theme="dark"] .powered-by img {
+      filter: invert(1) grayscale(1) brightness(1.08);
+    }
+
+    .powered-by a:hover,
+    .powered-by a:focus-visible {
+      opacity: 0.92;
+      text-decoration: underline;
+      outline: none;
+    }
+
     @media (max-width: 380px) {
+      .hero-panel {
+        padding: 14px 16px 80px;
+      }
+
       .hero {
         grid-template-columns: 1fr;
-        justify-items: center;
-        text-align: center;
+        justify-items: start;
         gap: 8px;
-        margin-top: -2px;
       }
 
       .profile-text {
-        order: 2;
-        padding-left: 0;
+        padding-bottom: 6px;
       }
 
       .avatar {
-        margin-top: -10px;
+        transform: translateY(24px);
       }
 
       .content {
-        padding: 12px;
-      }
-
-    }
-
-    @media (max-height: 860px) {
-      .menu {
-        gap: 14px;
-      }
-
-      .menu-item {
-        padding: 12px 13px;
+        padding: 20px 14px 12px;
       }
     }
 
-    @media (max-height: 780px) {
+    @media (max-height: 810px) {
       body {
         padding: 10px 12px 6px;
       }
 
-      .header {
-        padding: 4px 14px 2px;
+      .hero-panel {
+        padding-bottom: 82px;
       }
 
-      .hero {
-        gap: 10px;
-        padding: 0 12px 2px;
-      }
-
-      .profile-text {
-        padding-left: 48px;
+      .avatar {
+        width: clamp(118px, 32vw, 162px);
+        height: clamp(118px, 32vw, 162px);
       }
 
       .content {
-        padding: 12px;
-        gap: 8px;
-      }
-
-      .name {
-        font-size: clamp(1.34rem, 4.2vw, 1.72rem);
-      }
-
-      .role {
-        font-size: clamp(0.82rem, 2.8vw, 0.94rem);
+        gap: 12px;
+        padding-top: 22px;
       }
 
       .menu {
-        gap: 10px;
+        gap: 3px;
       }
 
       .menu-item {
-        padding: 10px 11px;
+        padding: 8px 9px;
       }
 
       .item-text {
-        font-size: clamp(0.92rem, 3.1vw, 1.02rem);
-      }
-
-      .footer-wrap {
-        margin-top: 1px;
-        gap: 4px;
-      }
-
-      .footer-note {
-        margin-top: 3px;
-        font-size: 0.68rem;
+        font-size: clamp(0.92rem, 3.2vw, 1rem);
       }
     }
   </style>
 </head>
 <body>
   <div class="card-shell">
-    <header class="header">
-      <img
-        class="logo-image"
-        src="https://tandel.immobilien/.netlify/images?url=_astro%2Ftandel-logo.mZhEN1TH.png&fm=png&q=92"
-        alt="Tandel Immobilien"
-      />
-    </header>
-
-    <section class="hero" aria-label="Profilübersicht">
-      <div class="avatar">
-        <img src="./nico-tandel.png" alt="Profilbild Nico Tandel" />
-      </div>
-      <div class="profile-text">
-        <h1 class="name">Nico Tandel</h1>
-        <p class="role">Immobilienfachwirt</p>
-      </div>
-    </section>
-
     <main class="micro-card" aria-label="Digitale Visitenkarte von Nico Tandel">
+      <section class="hero-panel" aria-label="Profilübersicht">
+        <header class="header">
+          <img
+            class="logo-image"
+            src="https://tandel.immobilien/.netlify/images?url=_astro%2Ftandel-logo.mZhEN1TH.png&fm=png&q=92"
+            alt="Tandel Immobilien"
+          />
+        </header>
+
+        <div class="hero">
+          <div class="profile-text">
+            <h1 class="name">Nico Tandel</h1>
+            <p class="role">Immobilienfachwirt<br/>Tandel Immobilien</p>
+          </div>
+
+          <div class="avatar">
+            <img src="./nico-tandel.png" alt="Profilbild Nico Tandel" />
+          </div>
+        </div>
+      </section>
 
       <section class="content">
+      <section class="about" aria-label="Über mich">
+        <h2>Über mich</h2>
+        <p>
+          Ihr Ansprechpartner für Vermietung und Verkauf in der Region. Ich begleite Sie persönlich,
+          transparent und mit einem klaren Blick für die passende Immobilie.
+        </p>
+      </section>
+
       <ul class="menu" aria-label="Visitenkarten-Links">
         <li>
           <a class="menu-item" href="./nico-tandel.vcf" download="nico-tandel.vcf" aria-label="Visitenkarte download">
