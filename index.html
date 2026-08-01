@@ -232,11 +232,25 @@
       display: inline-grid;
       place-items: center;
       flex-shrink: 0;
-      background: rgba(198, 40, 40, 0.12);
-      border: 1px solid rgba(198, 40, 40, 0.28);
+      background: #eceff3;
+      border: 1px solid #d4dbe3;
       border-radius: 6px;
-      width: 24px;
-      height: 24px;
+      width: 36px;
+      height: 22px;
+      font-size: 10px;
+      font-weight: 800;
+      letter-spacing: 0.06em;
+      line-height: 1;
+      text-transform: uppercase;
+      font-family: "Mulish", system-ui, -apple-system, sans-serif;
+    }
+
+    .pdf-icon::before {
+      content: "PDF";
+    }
+
+    .pdf-icon svg {
+      display: none;
     }
 
     .download-icon svg {
@@ -247,6 +261,12 @@
     .pdf-icon svg {
       width: 14px;
       height: 14px;
+    }
+
+    [data-theme="dark"] .pdf-icon {
+      background: rgba(255, 255, 255, 0.16);
+      border-color: rgba(255, 255, 255, 0.3);
+      color: #ff6a6a;
     }
 
     .download-list a:hover,
