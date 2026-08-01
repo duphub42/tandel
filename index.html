@@ -221,9 +221,9 @@
     .profile-actions {
       display: inline-flex;
       align-items: center;
-      gap: 10px;
+      gap: clamp(12px, 3.4vw, 18px);
       margin-top: 2px;
-      margin-bottom: -2px;
+      margin-bottom: 0;
     }
 
     .profile-action {
@@ -258,10 +258,7 @@
       transform: translate(0, 4px);
       opacity: 0;
       pointer-events: none;
-      max-width: 148px;
-      white-space: normal;
-      overflow-wrap: anywhere;
-      text-align: center;
+      white-space: nowrap;
       padding: 6px 8px;
       border-radius: 8px;
       border: 1px solid color-mix(in oklab, var(--line) 44%, transparent);
@@ -282,9 +279,14 @@
       transform: translate(0, 0);
     }
 
+    .profile-action.is-tooltip-visible::after {
+      opacity: 1;
+      transform: translate(0, 0);
+    }
+
     .profile-action--mail::after {
-      left: auto;
-      right: -2px;
+      left: 0;
+      right: auto;
     }
 
     .avatar {
@@ -770,10 +772,10 @@
             <p class="role">Immobilienfachwirt</p>
             <hr class="profile-divider" aria-hidden="true" />
             <div class="profile-actions" aria-label="Kontaktaktionen">
-              <a class="profile-action profile-action--phone" href="tel:+491715051479" aria-label="Anrufen" data-tooltip="+49 171 50 51 479">
+              <a class="profile-action profile-action--phone" href="tel:+491715051479" aria-label="Anrufen" data-tooltip="+49 171 50 51 479" data-confirm-message="Noch einmal tippen: Anruf starten">
                 <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M6.62 10.79a15.46 15.46 0 0 0 6.59 6.59l2.2-2.2a1 1 0 0 1 1.01-.24 11.2 11.2 0 0 0 3.52.56 1 1 0 0 1 1 1V20a1 1 0 0 1-1 1A17 17 0 0 1 3 4a1 1 0 0 1 1-1h3.5a1 1 0 0 1 1 1 11.2 11.2 0 0 0 .56 3.52 1 1 0 0 1-.24 1.01l-2.2 2.26z"></path></svg>
               </a>
-              <a class="profile-action profile-action--mail" href="mailto:info@tandel.immobilien" aria-label="E-Mail schreiben" data-tooltip="info@tandel.immobilien">
+              <a class="profile-action profile-action--mail" href="mailto:info@tandel.immobilien" aria-label="E-Mail schreiben" data-tooltip="info@tandel.immobilien" data-confirm-message="Noch einmal tippen: E-Mail öffnen">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"></rect><path d="m4 7 8 6 8-6"></path></svg>
               </a>
             </div>
@@ -955,6 +957,68 @@
           applyTheme(toggle.checked ? "dark" : "light", true);
         });
       }
+
+      var profileActions = document.querySelectorAll(".profile-action");
+      var profileActionTimeoutId = null;
+
+      function clearProfileActionState() {
+        profileActions.forEach(function (actionEl) {
+          var baseTooltip = actionEl.getAttribute("data-base-tooltip") || actionEl.getAttribute("aria-label") || "Aktion";
+          actionEl.setAttribute("data-tooltip", baseTooltip);
+          actionEl.classList.remove("is-armed", "is-tooltip-visible");
+        });
+
+        if (profileActionTimeoutId) {
+          window.clearTimeout(profileActionTimeoutId);
+          profileActionTimeoutId = null;
+        }
+      }
+
+      function armProfileAction(actionEl) {
+        clearProfileActionState();
+        actionEl.classList.add("is-armed", "is-tooltip-visible");
+
+        var confirmMessage = actionEl.getAttribute("data-confirm-message");
+        if (confirmMessage) {
+          actionEl.setAttribute("data-tooltip", confirmMessage);
+        }
+
+        profileActionTimeoutId = window.setTimeout(function () {
+          var baseTooltip = actionEl.getAttribute("data-base-tooltip") || actionEl.getAttribute("aria-label") || "Aktion";
+          actionEl.setAttribute("data-tooltip", baseTooltip);
+          actionEl.classList.remove("is-armed", "is-tooltip-visible");
+          profileActionTimeoutId = null;
+        }, 2200);
+      }
+
+      profileActions.forEach(function (actionEl) {
+        var baseTooltip = actionEl.getAttribute("data-tooltip") || actionEl.getAttribute("aria-label") || "Aktion";
+        actionEl.setAttribute("data-base-tooltip", baseTooltip);
+
+        actionEl.addEventListener("mouseenter", function () {
+          actionEl.setAttribute("data-tooltip", actionEl.getAttribute("data-base-tooltip") || baseTooltip);
+        });
+
+        actionEl.addEventListener("focus", function () {
+          actionEl.setAttribute("data-tooltip", actionEl.getAttribute("data-base-tooltip") || baseTooltip);
+        });
+
+        actionEl.addEventListener("click", function (event) {
+          if (actionEl.classList.contains("is-armed")) {
+            clearProfileActionState();
+            return;
+          }
+
+          event.preventDefault();
+          armProfileAction(actionEl);
+        });
+      });
+
+      document.addEventListener("click", function (event) {
+        if (!event.target.closest(".profile-actions")) {
+          clearProfileActionState();
+        }
+      });
 
       var detailsList = document.querySelectorAll(".menu-details");
 
