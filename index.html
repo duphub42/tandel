@@ -9,17 +9,17 @@
   <title>Tandel Immobilien | Digitale Visitenkarte</title>
   <style>
     :root {
-      --brand: #1f6fb2;
-      --brand-deep: #155084;
-      --brand-soft: #e8f3fd;
-      --cta-surface: #edf5fc;
+      --brand: #2a6c9d;
+      --brand-deep: #1f567f;
+      --brand-soft: #edf3f8;
+      --cta-surface: #f1f5f9;
       --ink: #1d2033;
       --muted: #6a6f88;
       --panel: #ffffff;
       --line: #e7e8f3;
       --bg-top: #f7fbff;
       --bg-bottom: #ecf3f9;
-      --menu-border: rgba(82, 76, 120, 0.16);
+      --menu-border: rgba(55, 76, 98, 0.14);
       --state-accent: #c24d4d;
       --footer-muted: #7a8099;
     }
@@ -27,12 +27,12 @@
     [data-theme="dark"] {
       --ink: #edf0ff;
       --muted: #c4c8df;
-      --panel: #172233;
-      --cta-surface: #20384f;
-      --line: #2e3f56;
+      --panel: #182536;
+      --cta-surface: #1f3346;
+      --line: #30455f;
       --bg-top: #0d1621;
       --bg-bottom: #09111a;
-      --menu-border: rgba(255, 255, 255, 0.18);
+      --menu-border: rgba(255, 255, 255, 0.16);
       --brand-soft: #203246;
       --state-accent: #f38f8f;
       --footer-muted: #a5adc8;
@@ -130,14 +130,14 @@
     .hero-panel {
       position: relative;
       padding: 10px 22px 94px;
-      background: linear-gradient(140deg, #2f87cf 0%, var(--brand) 52%, var(--brand-deep) 100%);
+      background: linear-gradient(140deg, #3a7dac 0%, var(--brand) 56%, var(--brand-deep) 100%);
       color: #fff;
       border-radius: 30px 30px 0 0;
       overflow: visible;
     }
 
     [data-theme="dark"] .hero-panel {
-      background: linear-gradient(140deg, #2b72a8 0%, #1f5f97 52%, #144066 100%);
+      background: linear-gradient(140deg, #2a628f 0%, #23557c 56%, #1a4263 100%);
     }
 
     .hero-panel::after {
@@ -258,17 +258,17 @@
 
     .menu-item:hover,
     .menu-item:focus-visible {
-      background: color-mix(in oklab, var(--brand) 8%, var(--panel));
-      border-color: color-mix(in oklab, var(--brand) 40%, transparent);
+      background: color-mix(in oklab, var(--brand) 6%, var(--panel));
+      border-color: color-mix(in oklab, var(--brand) 28%, transparent);
       transform: translateX(1px);
       outline: none;
     }
 
     .menu-item--primary {
-      background: linear-gradient(138deg, #2f87cf 0%, var(--brand) 55%, var(--brand-deep) 100%);
+      background: linear-gradient(138deg, #3a7dac 0%, var(--brand) 58%, var(--brand-deep) 100%);
       color: #fff;
-      border-color: color-mix(in oklab, var(--brand) 70%, black);
-      box-shadow: 0 8px 18px color-mix(in oklab, var(--brand) 34%, transparent);
+      border-color: color-mix(in oklab, var(--brand) 52%, black);
+      box-shadow: 0 6px 14px color-mix(in oklab, var(--brand) 22%, transparent);
     }
 
     .menu-item--primary .icon {
@@ -283,9 +283,9 @@
 
     .menu-item--primary:hover,
     .menu-item--primary:focus-visible {
-      background: linear-gradient(138deg, #3493de 0%, #2679be 55%, #1a5b92 100%);
-      border-color: color-mix(in oklab, var(--brand) 64%, black);
-      box-shadow: 0 10px 20px color-mix(in oklab, var(--brand) 40%, transparent);
+      background: linear-gradient(138deg, #4688b6 0%, #2f709f 58%, #23577f 100%);
+      border-color: color-mix(in oklab, var(--brand) 48%, black);
+      box-shadow: 0 8px 16px color-mix(in oklab, var(--brand) 26%, transparent);
     }
 
     .menu-priority-block {
@@ -326,8 +326,8 @@
       display: inline-grid;
       place-items: center;
       color: #fff;
-      background: linear-gradient(145deg, #2d8ad3, var(--brand));
-      box-shadow: 0 3px 9px rgba(20, 73, 125, 0.32);
+      background: linear-gradient(145deg, #4a89b5, var(--brand));
+      box-shadow: 0 2px 6px rgba(20, 73, 125, 0.2);
     }
 
     .icon svg {
@@ -345,7 +345,7 @@
       color: color-mix(in oklab, var(--brand) 78%, transparent);
       display: inline-grid;
       place-items: center;
-      opacity: 0.9;
+      opacity: 0.72;
     }
 
     .arrow svg {
@@ -394,7 +394,7 @@
       gap: 8px;
       border: 1px solid var(--menu-border);
       border-radius: 12px;
-      background: color-mix(in oklab, var(--panel) 84%, var(--brand-soft));
+      background: color-mix(in oklab, var(--panel) 90%, var(--brand-soft));
     }
 
     .download-list a {
@@ -445,8 +445,8 @@
       display: inline-grid;
       place-items: center;
       flex-shrink: 0;
-      background: #f2f0f8;
-      border: 1px solid #ddd6eb;
+      background: #f5f6f8;
+      border: 1px solid #dde2e8;
       border-radius: 5px;
       width: 31px;
       height: 20px;
@@ -467,8 +467,8 @@
     }
 
     [data-theme="dark"] .pdf-icon {
-      background: rgba(255, 255, 255, 0.15);
-      border-color: rgba(255, 255, 255, 0.22);
+      background: rgba(255, 255, 255, 0.12);
+      border-color: rgba(255, 255, 255, 0.18);
     }
 
     .footer-wrap {
