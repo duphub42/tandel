@@ -324,50 +324,53 @@
       margin-top: 12px;
       display: grid;
       justify-items: center;
-      gap: 8px;
-      padding: 0 18px 8px;
+      gap: 6px;
+      padding: 0 18px 6px;
     }
 
     .footer-note {
-      margin-top: 12px;
+      margin-top: 10px;
       padding: 0;
       text-align: center;
       color: var(--footer-muted);
-      font-size: 0.8rem;
+      font-size: 0.72rem;
+      font-weight: 500;
+      letter-spacing: 0.01em;
     }
 
     .footer-note a {
-      color: var(--brand);
+      color: inherit;
       text-decoration: none;
-      font-weight: 700;
+      font-weight: 500;
     }
 
     .footer-note a:hover,
     .footer-note a:focus-visible {
       text-decoration: underline;
+      text-underline-offset: 2px;
       outline: none;
     }
 
     .theme-control {
       display: inline-flex;
       align-items: center;
-      gap: 10px;
-      color: var(--ink);
-      font-size: 0.78rem;
-      font-weight: 700;
-      letter-spacing: 0.02em;
+      gap: 8px;
+      color: var(--footer-muted);
+      font-size: 0.68rem;
+      font-weight: 600;
+      letter-spacing: 0.015em;
     }
 
     .theme-control__label {
-      min-width: 90px;
+      min-width: 80px;
       text-align: right;
     }
 
     .theme-switch {
       position: relative;
       display: inline-flex;
-      width: 48px;
-      height: 28px;
+      width: 42px;
+      height: 24px;
       cursor: pointer;
     }
 
@@ -389,13 +392,13 @@
 
     .theme-switch__thumb {
       position: absolute;
-      top: 3px;
-      left: 3px;
-      width: 20px;
-      height: 20px;
+      top: 2px;
+      left: 2px;
+      width: 18px;
+      height: 18px;
       border-radius: 50%;
       background: #fff;
-      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.24);
+      box-shadow: 0 1px 4px rgba(0, 0, 0, 0.22);
       transition: transform 160ms ease;
     }
 
@@ -405,7 +408,7 @@
     }
 
     .theme-switch input:checked + .theme-switch__track .theme-switch__thumb {
-      transform: translateX(20px);
+      transform: translateX(18px);
     }
 
     .theme-switch input:focus-visible + .theme-switch__track {
