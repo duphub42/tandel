@@ -279,8 +279,27 @@
       box-shadow: 0 10px 20px color-mix(in oklab, var(--brand) 40%, transparent);
     }
 
+    .menu-priority-block {
+      list-style: none;
+      margin: 0;
+      padding: 8px;
+      border-radius: 16px;
+      background: color-mix(in oklab, var(--brand) 9%, var(--panel));
+      border: 1px solid color-mix(in oklab, var(--brand) 22%, var(--line));
+    }
+
+    [data-theme="dark"] .menu-priority-block {
+      background: color-mix(in oklab, var(--brand) 18%, var(--panel));
+      border-color: color-mix(in oklab, var(--brand) 30%, var(--line));
+    }
+
+    .menu-priority-block hr {
+      border: 0;
+      border-top: 1px solid color-mix(in oklab, var(--brand) 42%, var(--line));
+      margin: 8px 2px 0;
+    }
+
     .menu-separator {
-      padding: 4px 2px 6px;
       list-style: none;
     }
 
@@ -669,7 +688,7 @@
 
       <section class="content">
       <ul class="menu" aria-label="Visitenkarten-Links">
-        <li>
+        <li class="menu-priority-block">
           <a class="menu-item menu-item--primary" href="https://tandel.immobilien/#kontakt" target="_blank" rel="noopener noreferrer" aria-label="Termin vereinbaren">
             <div class="menu-row">
               <span class="icon" aria-hidden="true">
@@ -681,9 +700,6 @@
               </span>
             </div>
           </a>
-        </li>
-
-        <li class="menu-separator" aria-hidden="true">
           <hr />
         </li>
 
