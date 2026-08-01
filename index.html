@@ -43,6 +43,8 @@
       --avatar-ring: rgba(255, 255, 255, 0.17);
       --avatar-bg: oklch(.34 .03 250);
       --footer-muted: oklch(.75 .02 250);
+      --bg-top: #18202a;
+      --bg-bottom: #10161f;
       --stroke: rgba(255, 255, 255, 0.14);
       --shadow-soft: 0 18px 45px rgba(0, 0, 0, 0.45);
       --shadow-card: 0 8px 20px rgba(0, 0, 0, 0.35);
@@ -82,6 +84,11 @@
       box-shadow: 0 10px 24px rgba(9, 31, 51, 0.09);
       border: 1px solid color-mix(in oklab, var(--line) 68%, transparent);
       backdrop-filter: blur(6px);
+    }
+
+    [data-theme="dark"] .micro-card {
+      box-shadow: 0 12px 28px rgba(0, 0, 0, 0.35);
+      background: color-mix(in oklab, var(--panel) 94%, transparent);
     }
 
     .header {
