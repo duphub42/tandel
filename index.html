@@ -2,7 +2,7 @@
 <html lang="de">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Mulish:wght@300;400;500;600;700;800&display=swap" />
@@ -10,6 +10,7 @@
   <style>
     :root {
       --page-gutter: 14px;
+      --app-height: 100vh;
       --brand: #2381e6;
       --brand-deep: #1c72cf;
       --brand-10-on-white: #e9f2fd;
@@ -76,13 +77,14 @@
     }
 
     html {
+      min-height: -webkit-fill-available;
       overflow-x: clip;
     }
 
     body {
       margin: 0;
-      height: 100svh;
-      min-height: 100svh;
+      height: var(--app-height);
+      min-height: var(--app-height);
       font-family: "Mulish", system-ui, -apple-system, sans-serif;
       color: var(--ink);
       background: linear-gradient(180deg, var(--bg-top), var(--bg-bottom));
@@ -97,6 +99,12 @@
       position: relative;
       isolation: isolate;
       touch-action: pan-y;
+    }
+
+    @supports (height: 100dvh) {
+      :root {
+        --app-height: 100dvh;
+      }
     }
 
     body::before,
@@ -1265,6 +1273,14 @@
       var cardShellEl = document.querySelector(".card-shell");
       var responsiveLabelEls = document.querySelectorAll(".item-text, .download-list a > span:first-child");
 
+      function syncAppHeight() {
+        var viewportHeight = window.visualViewport ? window.visualViewport.height : window.innerHeight;
+
+        if (viewportHeight) {
+          root.style.setProperty("--app-height", viewportHeight.toFixed(2) + "px");
+        }
+      }
+
       function fitResponsiveLabels() {
         responsiveLabelEls.forEach(function (labelEl) {
           var parentEl = labelEl.parentElement;
@@ -1299,7 +1315,7 @@
           return;
         }
 
-        var viewportHeight = window.innerHeight || document.documentElement.clientHeight;
+        var viewportHeight = window.visualViewport ? window.visualViewport.height : (window.innerHeight || document.documentElement.clientHeight);
         var cardTop = cardShellEl.getBoundingClientRect().top;
         var brandHeight = brandEl.getBoundingClientRect().height;
         var compactFactor = viewportHeight < 700 ? 0.018 : 0.03;
@@ -1310,6 +1326,12 @@
 
         brandEl.style.marginTop = clampedTop.toFixed(2) + "px";
         brandEl.style.marginBottom = minBoxGap.toFixed(2) + "px";
+      }
+
+      function handleViewportChange() {
+        syncAppHeight();
+        positionBrandLogo();
+        fitResponsiveLabels();
       }
 
       function applyTheme(theme, persist) {
@@ -1331,13 +1353,16 @@
         applyTheme(media.matches ? "dark" : "light", false);
       }
 
-      positionBrandLogo();
-      window.addEventListener("resize", positionBrandLogo);
-      fitResponsiveLabels();
-      window.addEventListener("resize", fitResponsiveLabels);
+      handleViewportChange();
+      window.addEventListener("resize", handleViewportChange);
+
+      if (window.visualViewport) {
+        window.visualViewport.addEventListener("resize", handleViewportChange);
+        window.visualViewport.addEventListener("scroll", handleViewportChange);
+      }
 
       if (document.fonts && document.fonts.ready) {
-        document.fonts.ready.then(fitResponsiveLabels);
+        document.fonts.ready.then(handleViewportChange);
       }
 
       media.addEventListener("change", function (event) {
