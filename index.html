@@ -93,7 +93,7 @@
       align-items: center;
       justify-items: center;
       gap: 0;
-      padding: 0 var(--page-gutter) calc(34px + env(safe-area-inset-bottom, 0px));
+      padding: 0 var(--page-gutter) calc(10px + env(safe-area-inset-bottom, 0px));
       overflow-x: clip;
       overflow-y: auto;
       position: relative;
@@ -709,7 +709,7 @@
       width: min(calc(100dvw - (var(--page-gutter) * 2)), 410px);
       max-width: 100%;
       margin-top: 0;
-      padding: clamp(8px, 2svh, 18px) 18px calc(22px + env(safe-area-inset-bottom, 0px));
+      padding: clamp(6px, 1.4svh, 14px) 18px 0;
       display: grid;
       justify-items: center;
       gap: 5px;
@@ -815,7 +815,7 @@
     }
 
     .powered-by {
-      margin: 8px 0;
+      margin: 4px 0 0;
       display: inline-flex;
       align-items: center;
       gap: 4px;
@@ -953,13 +953,13 @@
     @media (max-height: 810px) {
       body {
         --page-gutter: 12px;
-        padding: 8px 12px calc(28px + env(safe-area-inset-bottom, 0px));
+        padding: 6px 12px calc(8px + env(safe-area-inset-bottom, 0px));
       }
 
       .card-shell {
         --hero-pad-top: clamp(10px, 2svh, 18px);
-        --hero-pad-bottom: clamp(70px, 12svh, 94px);
-        --hero-min-height: clamp(126px, 20svh, 158px);
+        --hero-pad-bottom: clamp(56px, 9svh, 78px);
+        --hero-min-height: clamp(112px, 17svh, 142px);
       }
 
       .avatar {
@@ -967,20 +967,34 @@
       }
 
       .content {
-        gap: 12px;
-        padding-top: 0;
+        gap: 9px;
+        padding: 0 18px 12px;
       }
 
       .menu {
-        gap: 3px;
+        gap: 2px;
       }
 
       .menu-item {
-        padding: 7px 9px;
+        padding: 6px 9px;
+      }
+
+      .menu-priority-block {
+        margin-bottom: 6px;
+        padding: 12px 18px 14px;
       }
 
       .item-text {
         font-size: clamp(0.76rem, 3.1vw, 1rem);
+      }
+
+      .footer-wrap {
+        padding-top: 4px;
+        gap: 3px;
+      }
+
+      .footer-note {
+        margin-top: 2px;
       }
     }
 
@@ -991,8 +1005,8 @@
 
       .card-shell {
         --hero-pad-top: 8px;
-        --hero-pad-bottom: clamp(58px, 10svh, 72px);
-        --hero-min-height: clamp(112px, 18svh, 132px);
+        --hero-pad-bottom: clamp(46px, 8svh, 60px);
+        --hero-min-height: clamp(96px, 15svh, 118px);
       }
 
       .hero {
@@ -1022,14 +1036,14 @@
       }
 
       .content {
-        gap: 8px;
-        padding-bottom: 10px;
+        gap: 6px;
+        padding-bottom: 8px;
       }
 
       .menu-priority-block {
-        margin-bottom: 6px;
-        padding-top: 12px;
-        padding-bottom: 14px;
+        margin-bottom: 4px;
+        padding-top: 10px;
+        padding-bottom: 12px;
       }
 
       .menu > li:not(.menu-priority-block):not(:last-child) {
@@ -1056,13 +1070,17 @@
       }
 
       .footer-wrap {
-        padding-top: 6px;
-        gap: 3px;
+        padding-top: 3px;
+        gap: 2px;
       }
 
       .footer-note {
+        margin-top: 1px;
+        font-size: 0.64rem;
+      }
+
+      .powered-by {
         margin-top: 2px;
-        font-size: 0.66rem;
       }
     }
   </style>
