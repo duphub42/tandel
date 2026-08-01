@@ -50,8 +50,8 @@
       --menu-border: rgba(255, 255, 255, 0.18);
       --brand-soft: #243f5d;
       --brand-arc: #2a4d74;
-      --page-arc-front: #224163;
-      --page-arc-back: #18314d;
+      --page-arc-front: rgba(58, 98, 136, 0.18);
+      --page-arc-back: rgba(46, 78, 112, 0.14);
       --state-accent: #f38f8f;
       --footer-muted: #b5cae3;
       --list-icon-color: #dce8f8;
@@ -138,14 +138,18 @@
       opacity: 0.9;
     }
 
+    [data-theme="dark"] body::after {
+      opacity: 0.52;
+    }
+
     .card-shell {
-      --hero-pad-top: clamp(14px, 3.2svh, 28px);
+      --hero-pad-top: clamp(12px, 2.6svh, 22px);
       --hero-pad-right: 20px;
-      --hero-pad-bottom: clamp(78px, 13svh, 116px);
+      --hero-pad-bottom: clamp(70px, 10svh, 94px);
       --hero-pad-left: 40px;
-      --hero-min-height: clamp(138px, 22svh, 176px);
+      --hero-min-height: clamp(132px, 18svh, 150px);
       --avatar-height: 111.111%;
-      --avatar-right: clamp(-96px, -10svh, -58px);
+      --avatar-right: clamp(-42px, -4.8svh, -30px);
       width: var(--card-width);
       max-width: 100%;
       align-self: center;
@@ -924,7 +928,7 @@
         --hero-pad-bottom: 104px;
         --hero-pad-left: 32px;
         --hero-min-height: 164px;
-        --avatar-right: -50px;
+        --avatar-right: -24px;
       }
 
       .hero {
@@ -953,7 +957,7 @@
 
     @media (max-width: 340px) {
       .card-shell {
-        --avatar-right: -56px;
+        --avatar-right: -23px;
       }
     }
 
@@ -967,6 +971,7 @@
         --hero-pad-top: clamp(10px, 2svh, 18px);
         --hero-pad-bottom: clamp(56px, 9svh, 78px);
         --hero-min-height: clamp(112px, 17svh, 142px);
+        --avatar-right: clamp(-32px, -4.1svh, -24px);
       }
 
       .avatar {
