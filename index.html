@@ -144,7 +144,7 @@
       --hero-pad-left: 40px;
       --hero-min-height: clamp(138px, 22svh, 176px);
       --avatar-height: 111.111%;
-      --avatar-right: -38px;
+      --avatar-right: clamp(-96px, -10svh, -58px);
       width: min(calc(100dvw - (var(--page-gutter) * 2)), 410px);
       max-width: 100%;
       align-self: center;
@@ -297,7 +297,7 @@
       padding-bottom: 0;
       min-width: 0;
       position: relative;
-      z-index: 2;
+      z-index: 7;
     }
 
     .name {
@@ -413,13 +413,13 @@
 
     .avatar {
       position: absolute;
-      right: max(var(--avatar-right), calc(var(--page-gutter) * -1));
+      right: var(--avatar-right);
       bottom: 0;
       width: auto;
       min-width: 0;
       height: var(--avatar-height);
       justify-self: end;
-      z-index: 5;
+      z-index: 4;
       pointer-events: none;
       border-radius: 0;
       overflow: visible;
@@ -923,7 +923,7 @@
         --hero-pad-bottom: 104px;
         --hero-pad-left: 32px;
         --hero-min-height: 164px;
-        --avatar-right: -28px;
+        --avatar-right: -50px;
       }
 
       .hero {
@@ -947,6 +947,12 @@
 
       .content {
         padding: 0 14px 12px;
+      }
+    }
+
+    @media (max-width: 340px) {
+      .card-shell {
+        --avatar-right: -56px;
       }
     }
 
