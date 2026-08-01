@@ -54,8 +54,8 @@
       font-family: "Mulish", system-ui, -apple-system, sans-serif;
       color: var(--ink);
       background:
-        radial-gradient(38% 34% at 92% 68%, color-mix(in oklab, var(--brand) 17%, transparent), transparent 74%),
-        radial-gradient(45% 42% at 6% 76%, color-mix(in oklab, var(--brand) 12%, transparent), transparent 76%),
+        radial-gradient(58% 52% at 94% 70%, color-mix(in oklab, var(--brand) 22%, transparent), transparent 82%),
+        radial-gradient(64% 58% at 4% 78%, color-mix(in oklab, var(--brand) 18%, transparent), transparent 84%),
         linear-gradient(180deg, var(--bg-top), var(--bg-bottom));
       display: grid;
       grid-template-rows: auto 1fr auto;
@@ -94,19 +94,23 @@
     }
 
     .card-shell::before {
-      width: 240px;
-      height: 240px;
-      right: -132px;
-      top: 220px;
-      background: color-mix(in oklab, var(--brand) 10%, transparent);
+      width: 360px;
+      height: 360px;
+      right: -188px;
+      top: 180px;
+      background: color-mix(in oklab, var(--brand) 18%, transparent);
+      filter: blur(44px);
+      opacity: 0.8;
     }
 
     .card-shell::after {
-      width: 180px;
-      height: 180px;
-      left: -102px;
-      top: 332px;
-      background: color-mix(in oklab, var(--brand) 8%, transparent);
+      width: 290px;
+      height: 290px;
+      left: -168px;
+      top: 280px;
+      background: color-mix(in oklab, var(--brand) 14%, transparent);
+      filter: blur(38px);
+      opacity: 0.72;
     }
 
     .micro-card {
@@ -264,34 +268,10 @@
       outline: none;
     }
 
-    .menu-item--primary {
-      background: linear-gradient(138deg, #2f87cf 0%, var(--brand) 55%, var(--brand-deep) 100%);
-      color: #fff;
-      border-color: color-mix(in oklab, var(--brand) 66%, black);
-      box-shadow: 0 8px 18px color-mix(in oklab, var(--brand) 32%, transparent);
-    }
-
-    .menu-item--primary .icon {
-      background: rgba(255, 255, 255, 0.18);
-      box-shadow: none;
-    }
-
-    .menu-item--primary .arrow,
-    .menu-item--primary .item-text {
-      color: #fff;
-    }
-
-    .menu-item--primary:hover,
-    .menu-item--primary:focus-visible {
-      background: linear-gradient(138deg, #3493de 0%, #2679be 55%, #1a5b92 100%);
-      border-color: color-mix(in oklab, var(--brand) 62%, black);
-      box-shadow: 0 10px 20px color-mix(in oklab, var(--brand) 38%, transparent);
-    }
-
     .menu-priority-block {
       list-style: none;
       margin: 0 -20px 10px;
-      padding: 10px 20px 12px;
+      padding: 10px 20px 14px;
       border-radius: 0;
       background: var(--cta-surface);
       border-top: 0;
@@ -300,6 +280,102 @@
 
     [data-theme="dark"] .menu-priority-block {
       background: var(--cta-surface);
+    }
+
+    .quick-actions {
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+    }
+
+    .quick-action {
+      position: relative;
+      width: 52px;
+      height: 52px;
+      border-radius: 15px;
+      display: inline-grid;
+      place-items: center;
+      color: #fff;
+      text-decoration: none;
+      background: linear-gradient(140deg, #2f87cf 0%, var(--brand) 58%, var(--brand-deep) 100%);
+      border: 1px solid color-mix(in oklab, var(--brand) 64%, black);
+      box-shadow: 0 9px 18px color-mix(in oklab, var(--brand) 30%, transparent);
+      transition: transform 160ms ease, box-shadow 160ms ease, filter 160ms ease;
+      outline: none;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    .quick-action svg {
+      width: 22px;
+      height: 22px;
+    }
+
+    .quick-action:hover,
+    .quick-action:focus-visible,
+    .quick-action.is-armed {
+      transform: translateY(-1px);
+      box-shadow: 0 12px 22px color-mix(in oklab, var(--brand) 34%, transparent);
+      filter: saturate(1.04);
+    }
+
+    .quick-action::after {
+      content: attr(data-tooltip);
+      position: absolute;
+      left: 50%;
+      bottom: calc(100% + 10px);
+      transform: translate(-50%, 5px);
+      padding: 7px 9px;
+      border-radius: 9px;
+      background: color-mix(in oklab, var(--ink) 92%, #0a0f1d);
+      color: #fff;
+      border: 1px solid color-mix(in oklab, var(--line) 42%, transparent);
+      box-shadow: 0 8px 16px rgba(8, 12, 22, 0.3);
+      font-size: 0.72rem;
+      font-weight: 700;
+      line-height: 1.15;
+      letter-spacing: 0.005em;
+      white-space: nowrap;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 130ms ease, transform 130ms ease;
+      z-index: 7;
+    }
+
+    .quick-action::before {
+      content: "";
+      position: absolute;
+      left: 50%;
+      bottom: calc(100% + 4px);
+      width: 9px;
+      height: 9px;
+      background: color-mix(in oklab, var(--ink) 92%, #0a0f1d);
+      border-right: 1px solid color-mix(in oklab, var(--line) 42%, transparent);
+      border-bottom: 1px solid color-mix(in oklab, var(--line) 42%, transparent);
+      transform: translateX(-50%) rotate(45deg);
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 130ms ease;
+      z-index: 6;
+    }
+
+    .quick-action:hover::after,
+    .quick-action:hover::before,
+    .quick-action:focus-visible::after,
+    .quick-action:focus-visible::before,
+    .quick-action.is-tooltip-visible::after,
+    .quick-action.is-tooltip-visible::before {
+      opacity: 1;
+    }
+
+    .quick-action:hover::after,
+    .quick-action:focus-visible::after,
+    .quick-action.is-tooltip-visible::after {
+      transform: translate(-50%, 0);
+    }
+
+    [data-theme="dark"] .quick-action::after,
+    [data-theme="dark"] .quick-action::before {
+      background: #091321;
     }
 
     .menu-separator {
@@ -692,18 +768,20 @@
 
       <section class="content">
       <ul class="menu" aria-label="Visitenkarten-Links">
-        <li class="menu-priority-block">
-          <a class="menu-item menu-item--primary" href="https://tandel.immobilien/#kontakt" target="_blank" rel="noopener noreferrer" aria-label="Termin vereinbaren">
-            <div class="menu-row">
-              <span class="icon" aria-hidden="true">
-                <svg viewBox="0 0 24 24" fill="currentColor"><path d="M7 2h2v2h6V2h2v2h3a2 2 0 0 1 2 2v13a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h3V2zm13 8H4v9h16v-9zM6 12h5v5H6v-5z"></path></svg>
-              </span>
-              <span class="item-text">Termin vereinbaren</span>
-              <span class="arrow" aria-hidden="true">
-                <svg viewBox="0 0 24 24" fill="currentColor"><path d="M9.29 6.71a1 1 0 0 1 1.42 0l4.59 4.59a1 1 0 0 1 0 1.41l-4.59 4.59a1 1 0 0 1-1.42-1.41L13.17 12 9.29 8.12a1 1 0 0 1 0-1.41z"></path></svg>
-              </span>
-            </div>
-          </a>
+        <li class="menu-priority-block" aria-label="Schnellaktionen">
+          <div class="quick-actions">
+            <a class="quick-action" href="https://tandel.immobilien/#kontakt" target="_blank" rel="noopener noreferrer" aria-label="Termin vereinbaren" data-tooltip="Termin anfragen" data-confirm-message="Noch einmal tippen: Termin anfragen">
+              <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M7 2h2v2h6V2h2v2h3a2 2 0 0 1 2 2v13a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h3V2zm13 8H4v9h16v-9zM6 12h5v5H6v-5z"></path></svg>
+            </a>
+
+            <a class="quick-action" href="tel:+491715051479" aria-label="Anrufen" data-tooltip="+49 171 50 51 479" data-confirm-message="Noch einmal tippen: Anruf starten">
+              <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M6.62 10.79a15.46 15.46 0 0 0 6.59 6.59l2.2-2.2a1 1 0 0 1 1.01-.24 11.2 11.2 0 0 0 3.52.56 1 1 0 0 1 1 1V20a1 1 0 0 1-1 1A17 17 0 0 1 3 4a1 1 0 0 1 1-1h3.5a1 1 0 0 1 1 1 11.2 11.2 0 0 0 .56 3.52 1 1 0 0 1-.24 1.01l-2.2 2.26z"></path></svg>
+            </a>
+
+            <a class="quick-action" href="mailto:info@tandel.immobilien" aria-label="E-Mail schreiben" data-tooltip="info@tandel.immobilien" data-confirm-message="Noch einmal tippen: E-Mail öffnen">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"></rect><path d="m4 7 8 6 8-6"></path></svg>
+            </a>
+          </div>
         </li>
 
         <li>
@@ -859,6 +937,68 @@
           applyTheme(toggle.checked ? "dark" : "light", true);
         });
       }
+
+      var quickActions = document.querySelectorAll(".quick-action");
+      var armTimeoutId = null;
+
+      function clearArmedActions() {
+        quickActions.forEach(function (actionEl) {
+          var baseTooltip = actionEl.getAttribute("data-base-tooltip") || actionEl.getAttribute("aria-label") || "Aktion";
+          actionEl.setAttribute("data-tooltip", baseTooltip);
+          actionEl.classList.remove("is-armed", "is-tooltip-visible");
+        });
+
+        if (armTimeoutId) {
+          window.clearTimeout(armTimeoutId);
+          armTimeoutId = null;
+        }
+      }
+
+      function armAction(actionEl) {
+        clearArmedActions();
+        actionEl.classList.add("is-armed", "is-tooltip-visible");
+
+        var confirmMessage = actionEl.getAttribute("data-confirm-message");
+        if (confirmMessage) {
+          actionEl.setAttribute("data-tooltip", confirmMessage);
+        }
+
+        armTimeoutId = window.setTimeout(function () {
+          var baseTooltip = actionEl.getAttribute("data-base-tooltip") || actionEl.getAttribute("aria-label") || "Aktion";
+          actionEl.setAttribute("data-tooltip", baseTooltip);
+          actionEl.classList.remove("is-armed", "is-tooltip-visible");
+          armTimeoutId = null;
+        }, 2200);
+      }
+
+      quickActions.forEach(function (actionEl) {
+        var baseTooltip = actionEl.getAttribute("data-tooltip") || actionEl.getAttribute("aria-label") || "Aktion";
+        actionEl.setAttribute("data-base-tooltip", baseTooltip);
+
+        actionEl.addEventListener("mouseenter", function () {
+          actionEl.setAttribute("data-tooltip", actionEl.getAttribute("data-base-tooltip") || baseTooltip);
+        });
+
+        actionEl.addEventListener("focus", function () {
+          actionEl.setAttribute("data-tooltip", actionEl.getAttribute("data-base-tooltip") || baseTooltip);
+        });
+
+        actionEl.addEventListener("click", function (event) {
+          if (actionEl.classList.contains("is-armed")) {
+            clearArmedActions();
+            return;
+          }
+
+          event.preventDefault();
+          armAction(actionEl);
+        });
+      });
+
+      document.addEventListener("click", function (event) {
+        if (!event.target.closest(".quick-actions")) {
+          clearArmedActions();
+        }
+      });
 
       var detailsList = document.querySelectorAll(".menu-details");
 
