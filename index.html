@@ -326,7 +326,7 @@
       margin-top: 12px;
       display: grid;
       justify-items: center;
-      gap: 6px;
+      gap: 7px;
       padding: 0 18px 6px;
     }
 
@@ -358,14 +358,14 @@
       align-items: center;
       gap: 8px;
       color: var(--footer-muted);
-      font-size: 0.68rem;
+      font-size: 0.67rem;
       font-weight: 600;
       letter-spacing: 0.015em;
     }
 
-    .theme-control__label {
-      min-width: 80px;
-      text-align: right;
+    .theme-text {
+      min-width: 38px;
+      text-align: center;
     }
 
     .theme-switch {
@@ -558,6 +558,17 @@
   </div>
 
   <div class="footer-wrap">
+    <div class="theme-control" aria-label="Theme-Steuerung">
+      <span class="theme-text">Hell</span>
+      <label class="theme-switch" for="themeSwitch" aria-label="Theme-Switch">
+        <input id="themeSwitch" type="checkbox" role="switch" aria-label="Zwischen hellem und dunklem Theme wechseln" />
+        <span class="theme-switch__track" aria-hidden="true">
+          <span class="theme-switch__thumb"></span>
+        </span>
+      </label>
+      <span class="theme-text">Dunkel</span>
+    </div>
+
     <p class="footer-note">
       (C) 2026 Tandel Immobilien ·
       <a href="https://tandel.immobilien" target="_blank" rel="noopener noreferrer">Webseite</a>
@@ -566,16 +577,6 @@
       ·
       <a href="https://tandel.immobilien/datenschutz/" target="_blank" rel="noopener noreferrer">Datenschutz</a>
     </p>
-
-    <div class="theme-control" aria-live="polite">
-      <span class="theme-control__label" id="themeModeLabel">Auto · Hell</span>
-      <label class="theme-switch" for="themeSwitch" aria-label="Theme-Switch">
-        <input id="themeSwitch" type="checkbox" role="switch" aria-label="Zwischen hellem und dunklem Theme wechseln" />
-        <span class="theme-switch__track" aria-hidden="true">
-          <span class="theme-switch__thumb"></span>
-        </span>
-      </label>
-    </div>
   </div>
 
   <script>
@@ -583,21 +584,11 @@
       var THEME_KEY = "vcard-theme";
       var root = document.documentElement;
       var toggle = document.getElementById("themeSwitch");
-      var label = document.getElementById("themeModeLabel");
       var media = window.matchMedia("(prefers-color-scheme: dark)");
       var autoMode = false;
 
-      function updateLabel(theme) {
-        if (!label) {
-          return;
-        }
-        var modeText = theme === "dark" ? "Dunkel" : "Hell";
-        label.textContent = autoMode ? "Auto · " + modeText : modeText;
-      }
-
       function applyTheme(theme, persist) {
         root.setAttribute("data-theme", theme);
-        updateLabel(theme);
         if (toggle) {
           toggle.checked = theme === "dark";
         }
