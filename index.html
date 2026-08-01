@@ -9,7 +9,8 @@
   <title>Tandel Immobilien | Digitale Visitenkarte</title>
   <style>
     :root {
-      --page-gutter: 14px;
+      --page-gutter: clamp(22px, 7dvw, 36px);
+      --card-width: min(calc(100dvw - (var(--page-gutter) * 2)), 374px);
       --app-height: 100vh;
       --brand: #2381e6;
       --brand-deep: #1c72cf;
@@ -145,7 +146,7 @@
       --hero-min-height: clamp(138px, 22svh, 176px);
       --avatar-height: 111.111%;
       --avatar-right: clamp(-96px, -10svh, -58px);
-      width: min(calc(100dvw - (var(--page-gutter) * 2)), 410px);
+      width: var(--card-width);
       max-width: 100%;
       align-self: center;
       position: relative;
@@ -157,7 +158,7 @@
       display: flex;
       justify-content: center;
       align-self: start;
-      width: min(calc(100dvw - (var(--page-gutter) * 2)), 410px);
+      width: var(--card-width);
       max-width: 100%;
       padding: 0;
       margin-top: 0;
@@ -706,7 +707,7 @@
     }
 
     .footer-wrap {
-      width: min(calc(100dvw - (var(--page-gutter) * 2)), 410px);
+      width: var(--card-width);
       max-width: 100%;
       margin-top: 0;
       padding: clamp(6px, 1.4svh, 14px) 18px 0;
@@ -958,7 +959,7 @@
 
     @media (max-height: 810px) {
       body {
-        --page-gutter: 12px;
+        --page-gutter: clamp(20px, 6.4dvw, 32px);
         padding: 6px 12px calc(8px + env(safe-area-inset-bottom, 0px));
       }
 
