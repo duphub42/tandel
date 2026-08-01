@@ -147,7 +147,7 @@
 
     .name {
       margin: 0;
-      font-size: clamp(1.58rem, 4.9vw, 2.08rem);
+      font-size: clamp(1.66rem, 5.2vw, 2.2rem);
       line-height: 1.02;
       letter-spacing: 0.01em;
       font-weight: 800;
@@ -156,14 +156,14 @@
     .role {
       margin: 0;
       color: var(--muted);
-      font-size: clamp(0.9rem, 2.9vw, 1.02rem);
-      font-weight: 400;
+      font-size: clamp(0.86rem, 2.7vw, 0.98rem);
+      font-weight: 300;
       letter-spacing: 0.015em;
     }
 
     .menu {
       display: grid;
-      gap: 16px;
+      gap: 18px;
       margin: 0;
       padding: 0;
       list-style: none;
@@ -176,7 +176,7 @@
       background: var(--surface);
       border: 1px solid var(--menu-border);
       border-radius: var(--radius-pill);
-      box-shadow: 0 1px 4px rgba(7, 28, 47, 0.04);
+      box-shadow: 0 1px 3px rgba(7, 28, 47, 0.04);
       padding: 15px 14px;
       transition: transform 160ms ease, box-shadow 160ms ease, border-color 160ms ease;
     }
@@ -184,9 +184,27 @@
     .menu-item:hover,
     .menu-item:focus-visible {
       transform: translateY(-1px);
-      box-shadow: 0 6px 14px rgba(7, 28, 47, 0.08);
-      border-color: rgba(21, 102, 162, 0.42);
+      box-shadow: 0 4px 12px rgba(7, 28, 47, 0.07);
+      border-color: color-mix(in oklab, var(--brand) 48%, var(--menu-border));
       outline: none;
+    }
+
+    .menu-item--primary {
+      background: var(--brand);
+      border-color: color-mix(in oklab, var(--brand) 76%, black);
+      color: #fff;
+      box-shadow: 0 5px 14px color-mix(in oklab, var(--brand) 32%, transparent);
+    }
+
+    .menu-item--primary .icon,
+    .menu-item--primary .arrow {
+      color: #fff;
+    }
+
+    .menu-item--primary:hover,
+    .menu-item--primary:focus-visible {
+      border-color: color-mix(in oklab, var(--brand) 62%, black);
+      box-shadow: 0 9px 18px color-mix(in oklab, var(--brand) 36%, transparent);
     }
 
     .menu-details > summary {
@@ -229,9 +247,9 @@
       padding: 0 8px 8px 44px;
       display: grid;
       gap: 10px;
-      border: 1px solid color-mix(in oklab, var(--line) 72%, transparent);
+      border: 1px solid color-mix(in oklab, var(--line) 68%, transparent);
       border-radius: 14px;
-      background: color-mix(in oklab, var(--surface) 76%, var(--bg));
+      background: color-mix(in oklab, var(--surface) 82%, var(--bg));
     }
 
     .download-list a {
@@ -501,7 +519,7 @@
 
     @media (max-height: 860px) {
       .menu {
-        gap: 13px;
+        gap: 14px;
       }
 
       .menu-item {
@@ -603,7 +621,7 @@
         </li>
 
         <li>
-          <a class="menu-item" href="https://tandel.immobilien/#kontakt" target="_blank" rel="noopener noreferrer" aria-label="Termin vereinbaren">
+          <a class="menu-item menu-item--primary" href="https://tandel.immobilien/#kontakt" target="_blank" rel="noopener noreferrer" aria-label="Termin vereinbaren">
             <div class="menu-row">
               <span class="icon" aria-hidden="true">
                 <svg viewBox="0 0 24 24" fill="currentColor"><path d="M7 2h2v2h6V2h2v2h3a2 2 0 0 1 2 2v13a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h3V2zm13 8H4v9h16v-9zM6 12h5v5H6v-5z"></path></svg>
